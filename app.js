@@ -185,6 +185,7 @@ function renderDetail() {
         <ol class="stappen-lijst">${r.stappen.map((s) => `<li><span>${esc(s.t)}</span></li>`).join("")}</ol>
         <div class="tipkaart tip"><b>💡 Tip</b>${esc(r.tip)}</div>
         <div class="tipkaart fout"><b>🙈 Meest gemaakte fout</b>${esc(r.fout)}</div>
+        ${r.bron ? `<div class="tipkaart bron"><b>✅ Bewezen recept</b>Overgenomen uit ${r.bron.map((b) => `<a href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">${esc(b.naam)}</a>`).join(" en ")}${r.bewijs ? `. ${esc(r.bewijs)}` : ""}. Alleen de maten zijn omgerekend naar ml en lepels.</div>` : ""}
       </div>
     </div>
     ${winkelPaneel(r)}
@@ -393,13 +394,13 @@ const BADGES = [
   { icoon: "🐣", naam: "Eerste slijm", uitleg: "Maak je eerste slijm", test: () => aantalGemaakt() >= 1 },
   { icoon: "🧪", naam: "Labassistent", uitleg: "Maak 3 keer slijm", test: () => aantalGemaakt() >= 3 },
   { icoon: "🌈", naam: "Ontdekker", uitleg: "Maak 5 verschillende recepten", test: () => Object.keys(staat.gemaakt).length >= 5 },
-  { icoon: "☁️", naam: "Wolkenmaker", uitleg: "Maak fluffy of cloud slime", test: () => staat.gemaakt.fluffy || staat.gemaakt.cloud },
-  { icoon: "💎", naam: "Kristalhelder", uitleg: "Maak glitter- of clear slime", test: () => staat.gemaakt.glitter },
+  { icoon: "☁️", naam: "Wolkenmaker", uitleg: "Maak fluffy slijm", test: () => staat.gemaakt.fluffy },
+  { icoon: "💎", naam: "Glitterster", uitleg: "Maak glitterslijm", test: () => staat.gemaakt.glitter },
+  { icoon: "🌙", naam: "Nachtlicht", uitleg: "Maak glow-in-the-dark slijm", test: () => staat.gemaakt.glow },
   { icoon: "🌱", naam: "Groene held", uitleg: "Maak een recept zonder activator", test: () => RECEPTEN.some((r) => r.activator === "geen" && staat.gemaakt[r.id]) },
   { icoon: "😋", naam: "Smulpaap", uitleg: "Maak een eetbaar slijm", test: () => RECEPTEN.some((r) => r.eetbaar && staat.gemaakt[r.id]) },
-  { icoon: "🏆", naam: "Uitdaging!", uitleg: "Maak een uitdagend recept", test: () => RECEPTEN.some((r) => r.moeilijk === 3 && staat.gemaakt[r.id]) },
   { icoon: "⭐", naam: "Perfectie", uitleg: "Geef een slijm 5 sterren", test: () => Object.values(staat.sterren).includes(5) },
-  { icoon: "👑", naam: "Slijmkoning(in)", uitleg: "Maak 10 verschillende recepten", test: () => Object.keys(staat.gemaakt).length >= 10 },
+  { icoon: "👑", naam: "Slijmkoning(in)", uitleg: "Maak alle recepten", test: () => RECEPTEN.every((r) => staat.gemaakt[r.id]) },
 ];
 const verdiendeBadges = () => BADGES.filter((b) => b.test());
 function updateScore() {

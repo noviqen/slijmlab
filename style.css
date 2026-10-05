@@ -342,3 +342,5 @@ a.grote-knop { text-decoration: none; display: inline-block; }
 .winkelpaneel { margin-top: 16px; }
 .kaart-top .label.eetbaar { background: #ff4fa3; color: #fff; }
 .waarschuwing.eetbaar-info { background: #ffe8f4; }
+.tipkaart.bron { background: #eef6ff; }
+.tipkaart.bron a { color: var(--paars); font-weight: 700; }

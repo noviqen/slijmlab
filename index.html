@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SlijmLab – Stap voor stap het perfecte slijm</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Maak stap voor stap het perfecte slijm: fluffy, glitter, butter, crunchy en meer. Met timers, probleemoplosser en veiligheidstips.">
+  <meta name="theme-color" content="#7b2ff7">
+  <link rel="icon" href="logo.svg?v=1" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+  <noscript><p style="padding:20px;text-align:center">Zet JavaScript aan om SlijmLab te gebruiken.</p></noscript>
+
+  <div class="achtergrond-blobs" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header>
+    <div class="logo" id="naarHome" role="button" tabindex="0">
+      <img src="logo.svg?v=1" alt="" width="54" height="54" class="logo-img">
+      <span>Slijm<b>Lab</b></span>
+    </div>
+    <div class="scorebalk">
+      <span title="Gemaakt">🧪 <b id="aantalGemaakt">0</b></span>
+      <span title="Badges">🏅 <b id="aantalBadges">0</b></span>
+    </div>
+  </header>
+
+  <nav id="nav">
+    <button data-tab="recepten" class="actief">🫧 Recepten</button>
+    <button data-tab="basis">🧠 Zo werkt slijm</button>
+    <button data-tab="hulp">🚑 Slijm-dokter</button>
+    <button data-tab="veilig">🛡️ Veiligheid</button>
+    <button data-tab="mijn">🏅 Mijn lab</button>
+  </nav>
+
+  <main>
+    <!-- RECEPTEN -->
+    <section id="recepten" class="tab actief">
+      <div class="hero">
+        <div class="hero-tekst">
+          <h1>Maak het <span class="regenboog">perfecte slijm</span></h1>
+          <p>Kies een recept, verzamel je spullen en volg de stappen. SlijmLab helpt je met timers en tips.</p>
+        </div>
+        <div class="hero-blob" id="heroBlob" aria-hidden="true"></div>
+      </div>
+      <div class="filters" id="filters"></div>
+      <div class="kaarten" id="kaarten"></div>
+    </section>
+
+    <!-- BASIS -->
+    <section id="basis" class="tab"><div id="basisInhoud"></div></section>
+
+    <!-- HULP -->
+    <section id="hulp" class="tab">
+      <h2>🚑 Slijm-dokter</h2>
+      <p class="hint">Wat is er mis met je slijm? Tik op het probleem.</p>
+      <div class="problemen" id="problemen"></div>
+    </section>
+
+    <!-- VEILIG -->
+    <section id="veilig" class="tab"><div id="veiligInhoud"></div></section>
+
+    <!-- MIJN LAB -->
+    <section id="mijn" class="tab"><div id="mijnInhoud"></div></section>
+
+    <!-- RECEPT DETAIL -->
+    <section id="detail" class="tab"><div id="detailInhoud"></div></section>
+
+    <!-- STAP-MODUS -->
+    <section id="stappen" class="tab"><div id="stapInhoud"></div></section>
+  </main>
+
+  <footer>SlijmLab · altijd met een volwassene in de buurt · <a href="#" id="naarVeilig">veiligheid</a></footer>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <script src="data.js?v=1"></script>
+  <script src="app.js?v=1"></script>
+</body>
+</html>

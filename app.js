@@ -3,7 +3,7 @@
 // ---------- opslag ----------
 const OPSLAG = "slijmlab-v1";
 const staat = Object.assign(
-  { gemaakt: {}, sterren: {}, favorieten: [], porties: 1 },
+  { gemaakt: {}, sterren: {}, favorieten: [], porties: 1, lijst: [], heb: {} },
   JSON.parse(localStorage.getItem(OPSLAG) || "{}")
 );
 const bewaar = () => localStorage.setItem(OPSLAG, JSON.stringify(staat));
@@ -19,6 +19,7 @@ function toonTab(id, { scroll = true } = {}) {
   huidigeTab = id;
   if (id !== "stappen") { stopTimer(); laatSchermSlapen(); }
   if (id === "mijn") renderMijn();
+  if (id === "boodschappen") renderBoodschappen();
   if (scroll) window.scrollTo({ top: 0, behavior: "smooth" });
 }
 $("#nav").addEventListener("click", (e) => {
@@ -184,6 +185,7 @@ function renderDetail() {
         <div class="tipkaart fout"><b>🙈 Meest gemaakte fout</b>${esc(r.fout)}</div>
       </div>
     </div>
+    ${winkelPaneel(r)}
     <div class="knoprij"><button class="grote-knop" data-actie="start">🚀 Start stap voor stap</button></div>`;
 }
 $("#detailInhoud").addEventListener("click", (e) => {
@@ -207,6 +209,11 @@ $("#detailInhoud").addEventListener("click", (e) => {
     bewaar(); renderDetail(); renderKaarten();
   }
   if (a.dataset.actie === "start") startStappen();
+  if (a.dataset.actie === "oplijst") {
+    if (!staat.lijst.includes(recept.id)) staat.lijst.push(recept.id);
+    bewaar(); updateLijstTeller(); renderDetail(); toast("🛒 Op je boodschappenlijst gezet!");
+  }
+  if (a.dataset.actie === "naarlijst") toonTab("boodschappen");
 });
 
 // ---------- STAP-VOOR-STAP ----------
@@ -411,6 +418,161 @@ function renderMijn() {
     </div>`;
 }
 
+// ---------- BOODSCHAPPEN ----------
+// unieke artikelen van een recept (water, handcrème e.d. hebben geen artikel)
+function artikelenVan(r) {
+  const uit = [];
+  r.ingredienten.forEach((ing) => {
+    const k = artikelVan(ing.n);
+    if (k && !uit.some((x) => x.k === k)) uit.push({ k, ing });
+  });
+  return uit;
+}
+function koopKnoppen(k) {
+  const a = ARTIKELEN[k];
+  const links = (a.links || []).map((l) =>
+    `<a class="koop" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(WINKELS[l.w]?.naam || l.w)}${l.prijs ? ` · ${esc(l.prijs)}` : ""} ↗</a>`);
+  const zoek = (a.zoekIn || []).map((w) =>
+    `<a class="koop zoek" href="${esc(WINKELS[w].zoek(a.zoek))}" target="_blank" rel="noopener noreferrer">🔎 ${esc(WINKELS[w].naam)} ↗</a>`);
+  return links.concat(zoek).join("");
+}
+function winkelChips(k) {
+  const w = ARTIKELEN[k].winkels || [];
+  return w.length ? `<span class="winkels">🏪 ${w.map((x) => esc(WINKELS[x].naam)).join(" · ")}</span>` : `<span class="winkels">🌐 Alleen online</span>`;
+}
+function artikelRij(k, extra = "", vink = false) {
+  const a = ARTIKELEN[k], heb = staat.heb[k];
+  return `
+    <div class="artikel ${vink && heb ? "heb" : ""}" data-art="${k}">
+      ${vink ? `<button class="vink" data-actie="heb" title="Heb ik al">${heb ? "✓" : ""}</button>` : `<span class="art-emoji">${a.emoji}</span>`}
+      <div class="art-info">
+        <b>${vink ? a.emoji + " " : ""}${esc(a.naam)}</b>${extra}
+        ${winkelChips(k)}
+        ${a.let ? `<small>💡 ${esc(a.let)}</small>` : ""}
+        <div class="koopknoppen">${koopKnoppen(k)}</div>
+      </div>
+    </div>`;
+}
+function winkelPaneel(r) {
+  const opLijst = staat.lijst.includes(r.id);
+  return `
+    <div class="paneel winkelpaneel">
+      <h3>🛒 Boodschappen voor ${esc(r.naam)}</h3>
+      <p class="sub">Waar koop je het? Tik op een winkel om meteen online te bestellen.</p>
+      ${artikelenVan(r).map(({ k }) => artikelRij(k)).join("")}
+      <div class="knoprij">
+        ${opLijst
+          ? `<button class="grote-knop roze" data-actie="naarlijst">✔ Staat op je lijst – bekijk lijst</button>`
+          : `<button class="grote-knop roze" data-actie="oplijst">➕ Zet op mijn boodschappenlijst</button>`}
+      </div>
+    </div>`;
+}
+function updateLijstTeller() {
+  const n = staat.lijst.length;
+  $("#lijstTeller").textContent = n ? n : "";
+  $("#lijstTeller").hidden = !n;
+}
+function lijstData() {
+  const recepten = staat.lijst.map((id) => RECEPTEN.find((r) => r.id === id)).filter(Boolean);
+  const per = {};
+  recepten.forEach((r) => artikelenVan(r).forEach(({ k, ing }) => {
+    (per[k] = per[k] || { k, voor: [], h: 0, e: ing.e, optel: true }).voor.push(r.naam);
+    if (ing.h != null && ing.e === per[k].e) per[k].h += ing.h; else per[k].optel = false;
+  }));
+  return { recepten, items: Object.values(per) };
+}
+function hoeveelTekst(it) {
+  if (!it.optel || !it.h || !it.e) return "";
+  if (it.e === "ml" && /lijm/.test(it.k)) return `${getal(it.h)} ml (± ${Math.ceil(it.h / 120)} flesje${it.h > 120 ? "s" : ""})`;
+  if (it.e === "druppels") return "";
+  return `${getal(it.h)} ${it.e}`;
+}
+function renderBoodschappen() {
+  const { recepten, items } = lijstData();
+  const el = $("#boodschappenInhoud");
+  if (!recepten.length) {
+    el.innerHTML = `
+      <h2>🛒 Boodschappenlijst</h2>
+      <div class="paneel"><p>Je lijst is nog leeg. Kies hieronder welk slijm je wilt maken, dan komt alles wat je nodig hebt op je lijst.</p>
+      <div class="kies-recepten">${RECEPTEN.map((r) => `<button data-kies="${r.id}">${r.emoji} ${esc(r.naam)}</button>`).join("")}</div></div>
+      ${pakketPaneel()}`;
+    return;
+  }
+  // groeperen per beste winkel
+  const groepen = {};
+  items.forEach((it) => {
+    const w = (ARTIKELEN[it.k].winkels || [])[0] || "online";
+    (groepen[w] = groepen[w] || []).push(it);
+  });
+  const volgorde = Object.keys(groepen).sort((a, b) => (a === "online") - (b === "online") || groepen[b].length - groepen[a].length);
+  const nogNodig = items.filter((it) => !staat.heb[it.k]).length;
+  el.innerHTML = `
+    <h2>🛒 Boodschappenlijst</h2>
+    <p class="hint">Voor ${recepten.length} recept${recepten.length > 1 ? "en" : ""} · nog ${nogNodig} van ${items.length} spullen halen. Vink af wat je al in huis hebt.</p>
+    <div class="paneel">
+      <div class="kies-recepten">
+        ${RECEPTEN.map((r) => `<button data-kies="${r.id}" class="${staat.lijst.includes(r.id) ? "aan" : ""}">${r.emoji} ${esc(r.naam)}</button>`).join("")}
+      </div>
+    </div>
+    ${volgorde.map((w) => `
+      <div class="paneel">
+        <h3>${w === "online" ? "🌐 Online bestellen" : `🏪 Bij de ${esc(WINKELS[w].naam)}`}</h3>
+        ${groepen[w].map((it) => artikelRij(it.k,
+          `${hoeveelTekst(it) ? ` <span class="pil">${esc(hoeveelTekst(it))}</span>` : ""}<span class="voor">voor: ${esc(it.voor.join(", "))}</span>`, true)).join("")}
+      </div>`).join("")}
+    <div class="paneel"><p class="sub">🏠 Heb je thuis vast al: een kom, een lepel, water en een afsluitbaar bakje of zakje.</p></div>
+    <div class="knoprij">
+      <a class="grote-knop" id="deelWhatsapp" href="${esc("https://wa.me/?text=" + encodeURIComponent(lijstTekst()))}" target="_blank" rel="noopener noreferrer">📲 Deel via WhatsApp</a>
+      <button class="grote-knop roze" data-actie="kopieer">📋 Kopieer lijst</button>
+      <button class="grote-knop vorige" data-actie="leeg">🗑️ Leegmaken</button>
+    </div>
+    ${pakketPaneel()}`;
+}
+function pakketPaneel() {
+  if (!PAKKETTEN.length) return "";
+  return `
+    <div class="paneel">
+      <h3>📦 Liever alles in één keer?</h3>
+      <p class="sub">Een slijmpakket heeft lijm, activator en versiering samen. Handig als cadeautje of om mee te beginnen.</p>
+      ${PAKKETTEN.map((p) => `
+        <div class="artikel"><span class="art-emoji">📦</span><div class="art-info"><b>${esc(p.naam)}</b>
+        ${p.uitleg ? `<small>${esc(p.uitleg)}</small>` : ""}
+        <div class="koopknoppen"><a class="koop" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(WINKELS[p.w]?.naam || p.w)}${p.prijs ? ` · ${esc(p.prijs)}` : ""} ↗</a></div></div></div>`).join("")}
+    </div>`;
+}
+function lijstTekst() {
+  const { recepten, items } = lijstData();
+  const regels = ["🛒 Slijm-boodschappen (SlijmLab)", "Voor: " + recepten.map((r) => r.naam).join(", "), ""];
+  items.filter((it) => !staat.heb[it.k]).forEach((it) => {
+    const a = ARTIKELEN[it.k], h = hoeveelTekst(it);
+    const w = (a.winkels || []).map((x) => WINKELS[x].naam).join("/") || "online";
+    regels.push(`- ${a.naam}${h ? ": " + h : ""} – ${w}`);
+  });
+  regels.push("", "Tip: lenzenvloeistof moet boorzuur bevatten. Baking soda, geen bakpoeder!", location.origin + location.pathname);
+  return regels.join("\n");
+}
+$("#boodschappenInhoud").addEventListener("click", async (e) => {
+  const kies = e.target.closest("[data-kies]");
+  if (kies) {
+    const id = kies.dataset.kies, i = staat.lijst.indexOf(id);
+    i >= 0 ? staat.lijst.splice(i, 1) : staat.lijst.push(id);
+    bewaar(); updateLijstTeller(); renderBoodschappen(); piep([i >= 0 ? 440 : 880], 0.08);
+    return;
+  }
+  const a = e.target.closest("[data-actie]"); if (!a) return;
+  if (a.dataset.actie === "heb") {
+    const k = a.closest("[data-art]").dataset.art;
+    staat.heb[k] = !staat.heb[k]; bewaar(); renderBoodschappen(); piep([staat.heb[k] ? 880 : 440], 0.08);
+  }
+  if (a.dataset.actie === "kopieer") {
+    try { await navigator.clipboard.writeText(lijstTekst()); toast("📋 Gekopieerd! Plak hem waar je wilt."); }
+    catch (_) { toast("Kopiëren lukte niet, gebruik WhatsApp delen."); }
+  }
+  if (a.dataset.actie === "leeg") {
+    staat.lijst = []; staat.heb = {}; bewaar(); updateLijstTeller(); renderBoodschappen();
+  }
+});
+
 // ---------- start ----------
 renderFilters();
 renderKaarten();
@@ -418,5 +580,6 @@ renderProblemen();
 renderBasis();
 renderVeilig();
 updateScore();
+updateLijstTeller();
 const start = location.hash.slice(1);
 if (start && RECEPTEN.some((r) => r.id === start)) openRecept(start);

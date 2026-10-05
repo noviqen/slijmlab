@@ -307,3 +307,36 @@ footer { text-align: center; color: #cbbcf0; padding: 20px; font-size: .9rem; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* BOODSCHAPPEN */
+nav .teller { background: #ff4fa3; color: #fff; border-radius: 999px; padding: 0 7px; font-size: .8rem; margin-left: 2px; }
+.paneel .sub { color: var(--zacht); margin: 0 0 8px; }
+.artikel { display: flex; gap: 12px; align-items: flex-start; padding: 12px 4px; border-top: 1px solid #f0e9ff; }
+.artikel:first-of-type { border-top: 0; }
+.art-emoji { font-size: 1.8rem; line-height: 1; flex: none; width: 36px; text-align: center; }
+.art-info { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.art-info b { font-size: 1.1rem; }
+.art-info small { color: var(--zacht); }
+.art-info .pil { margin-left: 6px; }
+.winkels { font-size: .9rem; color: #0b8a63; font-weight: 700; }
+.voor { display: block; font-size: .85rem; color: var(--zacht); }
+.koopknoppen { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.koop {
+  text-decoration: none; background: linear-gradient(135deg, #7b2ff7, #ff4fa3); color: #fff;
+  padding: 4px 12px; border-radius: 999px; font-weight: 800; font-size: .9rem; transition: transform .15s;
+}
+.koop:hover { transform: translateY(-2px); }
+.koop.zoek { background: #f2ecff; color: var(--paars); }
+.artikel .vink {
+  flex: none; width: 32px; height: 32px; border-radius: 10px; border: 3px solid #d7c8ff; background: #fff;
+  color: #fff; font-weight: 800; font-size: 1.1rem; margin-top: 2px;
+}
+.artikel.heb .vink { background: var(--groen); border-color: var(--groen); }
+.artikel.heb .art-info { opacity: .45; }
+.artikel.heb .art-info b { text-decoration: line-through; }
+.kies-recepten { display: flex; flex-wrap: wrap; gap: 8px; }
+.kies-recepten button { border: 2px solid #e4d9ff; background: #fff; border-radius: 999px; padding: 4px 12px; font-weight: 700; color: var(--tekst); }
+.kies-recepten button.aan { background: var(--paars); border-color: var(--paars); color: #fff; }
+a.grote-knop { text-decoration: none; display: inline-block; }
+.grote-knop.vorige { background: rgba(255,255,255,.18); color: #fff; box-shadow: none; }
+.winkelpaneel { margin-top: 16px; }

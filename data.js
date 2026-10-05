@@ -3,7 +3,7 @@
 // One Little Project, Best Ideas for Kids, RIVM-beoordeling borax in slijm (2019). Zie README.md.
 
 const LENS = "lenzenvloeistof met boorzuur";
-const LENS_X = "Op het etiket moet 'boorzuur' of 'borax' staan (bv. Etos All-in-1, Kruidvat Opticare)";
+const LENS_X = "Op het etiket moet 'boorzuur' of 'borax' staan (bv. Etos All-in-1 of Biotrue). Kruidvat Opticare werkt níet: daar zit geen boorzuur in";
 const SODA = "baking soda (zuiveringszout)";
 const SODA_X = "Geen bakpoeder! Dat is iets anders.";
 
@@ -13,7 +13,7 @@ const RECEPTEN = [
     kort: "Het gouden basisrecept. Lukt dit, dan lukt alles!",
     kleur: ["#5ef2a8", "#20c997", "#e6fff6"], moeilijk: 1, minuten: 10, leeftijd: 6,
     ingredienten: [
-      { h: 120, e: "ml", n: "witte PVA-kinderlijm", x: "1 flesje, bv. Action schoollijm. Geen lijmstift!" },
+      { h: 120, e: "ml", n: "witte PVA-kinderlijm", x: "1 flesje witte kinderlijm (HEMA, Action, Collall). Geen lijmstift!" },
       { h: 0.5, e: "tl", n: SODA, x: SODA_X },
       { h: 1, e: "el", n: LENS, x: LENS_X + ". Houd er nog wat extra bij." },
       { h: 2, e: "druppels", n: "kleurstof (mag ook niet)" },
@@ -125,7 +125,7 @@ const RECEPTEN = [
       { h: 120, e: "ml", n: "witte PVA-kinderlijm" },
       { h: 0.5, e: "tl", n: SODA, x: SODA_X },
       { h: 1, e: "el", n: LENS, x: LENS_X },
-      { h: 1, e: "el", n: "instant sneeuwpoeder (insta-snow)", x: "Bv. slijmkoopje.nl of bol.com. Spuitsneeuw werkt niet!" },
+      { h: 1, e: "el", n: "instant sneeuwpoeder (insta-snow)", x: "Online te koop (bol.com, Amazon). Spuitsneeuw werkt niet!" },
       { h: null, n: "water voor de sneeuw", x: "Zoveel als op de verpakking staat" },
     ],
     stappen: [
@@ -344,7 +344,7 @@ const BASIS = [
 ];
 
 const ACTIVATORS = [
-  { naam: "✅ Lenzenvloeistof + baking soda", hoe: "1 el lenzenvloeistof + ½ tl baking soda per flesje lijm", voor: "Alle recepten. Onze favoriet!", let: "Er moet 'boorzuur' of 'borax' op het etiket staan. Bv. Etos All-in-1, Kruidvat Opticare, Biotrue." },
+  { naam: "✅ Lenzenvloeistof + baking soda", hoe: "1 el lenzenvloeistof + ½ tl baking soda per flesje lijm", voor: "Alle recepten. Onze favoriet!", let: "Er moet 'boorzuur' of 'borax' op het etiket staan. Bv. Etos All-in-1 of Biotrue. Kruidvat Opticare heeft géén boorzuur." },
   { naam: "🟡 Kant-en-klare slime activator", hoe: "Volgens de verpakking", voor: "Handig, zit ook in slijmpakketjes", let: "Kies een product met CE-keurmerk." },
   { naam: "🔴 Boraxpoeder", hoe: "Niet aanbevolen", voor: "-", let: "In de EU aangemerkt als schadelijk. De meeste huidproblemen door slijm komen van borax." },
   { naam: "🔴 Wasmiddel", hoe: "Niet aanbevolen", voor: "-", let: "Werkt alleen als er borax in zit (vaak niet meer). Kan de huid irriteren." },
@@ -352,7 +352,7 @@ const ACTIVATORS = [
 
 const LIJM = [
   "Witte of transparante PVA-kinderlijm werkt het beste.",
-  "Action schoollijm (wit) wordt het meest gebruikt in Nederland.",
+  "Witte kinderlijm of schoollijm van HEMA, Action of Collall wordt het meest gebruikt.",
   "HEMA kinderlijm transparant en Collall kinderlijm transparant zijn goed voor helder slijm.",
   "Lijmstiften en secondelijm werken NIET.",
   "Witte lijm = romig slijm. Transparante lijm = helder slijm.",
@@ -367,4 +367,142 @@ const VEILIG = [
   { i: "🧪", titel: "Lenzenvloeistof, geen borax", tekst: "Het RIVM onderzocht zelfgemaakt slijm met lenzenvloeistof en zag geen risico. Boraxpoeder en wasmiddel raden we af." },
   { i: "🧲", titel: "Magneten en bolletjes", tekst: "Sterke magneten en schuimbolletjes zijn gevaarlijk als ze worden ingeslikt. Niet in de buurt van jonge kinderen." },
   { i: "🗑️", titel: "Weggooien", tekst: "Slijm in de vuilnisbak, niet door de gootsteen of wc. Schimmel of vieze geur? Meteen weggooien." },
+];
+
+// ---------- WINKELS & WEBSHOPS (gecontroleerd 05-10-2026) ----------
+const q = (t) => encodeURIComponent(t).replace(/%20/g, "+");
+const WINKELS = {
+  action: { naam: "Action", zoek: (t) => `https://www.action.com/nl-nl/search/?q=${q(t)}` },
+  hema: { naam: "HEMA", zoek: (t) => `https://www.hema.nl/search?q=${q(t)}` },
+  etos: { naam: "Etos", zoek: (t) => `https://www.etos.nl/search/?q=${q(t)}` },
+  kruidvat: { naam: "Kruidvat", zoek: (t) => `https://www.kruidvat.nl/search?q=${q(t)}&text=${q(t)}` },
+  ah: { naam: "Albert Heijn", zoek: (t) => `https://www.ah.nl/zoeken?query=${q(t)}` },
+  jumbo: { naam: "Jumbo", zoek: (t) => `https://www.jumbo.com/producten/?searchType=keyword&searchTerms=${q(t)}` },
+  xenos: { naam: "Xenos", zoek: (t) => `https://www.xenos.nl/search?q=${q(t)}` },
+  intertoys: { naam: "Intertoys", zoek: (t) => `https://www.intertoys.nl/search?text=${q(t)}` },
+  bol: { naam: "bol.com", zoek: (t) => `https://www.bol.com/nl/nl/s/?searchtext=${q(t)}` },
+  amazon: { naam: "Amazon", zoek: (t) => `https://www.amazon.nl/s?k=${q(t)}` },
+  ecotastisch: { naam: "Ecotastisch", zoek: (t) => `https://www.ecotastisch.nl/search?q=${q(t)}` },
+};
+
+// winkels: fysieke winkels, beste eerst. links: gecontroleerde productpagina's. zoekIn: extra zoeklinks.
+const ARTIKELEN = {
+  lijm_wit: {
+    naam: "Witte PVA-kinderlijm", emoji: "🧴", winkels: ["hema", "action", "xenos"], zoek: "kinderlijm wit",
+    let: "Op het etiket moet PVA of 'op waterbasis' staan. Groot gezin? Een literfles is voordeliger.",
+    links: [
+      { w: "bol", url: "https://www.bol.com/nl/nl/p/lijm-wit-op-waterbasis-1-liter-ook-voor-drakenslijm-of-smurfensnot/9200000090032706/", prijs: "1 liter" },
+    ],
+    zoekIn: ["hema", "action"],
+  },
+  lijm_helder: {
+    naam: "Transparante PVA-lijm", emoji: "🫙", winkels: ["hema"], zoek: "kinderlijm transparant",
+    links: [
+      { w: "hema", url: "https://www.hema.nl/speelgoed-hobby/knutselen/lijm/kinderlijm-200ml-15900626.html", prijs: "€3,69" },
+      { w: "bol", url: "https://www.bol.com/nl/nl/p/collall-kinderlijm-transparant-1000-ml-geschikt-voor-het-maken-van-slijm/9200000066094139/", prijs: "± €15 / liter" },
+    ],
+  },
+  soda: {
+    naam: "Baking soda (zuiveringszout)", emoji: "🧂", winkels: ["ah", "jumbo"], zoek: "baking soda",
+    let: "Niet verwarren met bakpoeder, kristalsoda of zilversoda! Arm & Hammer is de bekendste.",
+    links: [
+      { w: "jumbo", url: "https://www.jumbo.com/producten/arm-hammer-pure-baksoda-454-g-580764DS", prijs: "€1,89" },
+      { w: "ah", url: "https://www.ah.nl/producten/product/wi386329/arm-en-hammer-pure-baking-soda" },
+    ],
+  },
+  lens: {
+    naam: "Lenzenvloeistof met boorzuur", emoji: "💧", winkels: ["etos", "ah"], zoek: "lenzenvloeistof all-in-1",
+    let: "Etos All-in-1 heeft boorzuur (ook bij AH te koop). Kruidvat Opticare NIET. Twijfel? Kijk of er 'boorzuur' of 'borax' op staat.",
+    links: [
+      { w: "etos", url: "https://www.etos.nl/producten/etos-zachte-lenzen-all-in-1-vloeistof-360-ml-120288475.html", prijs: "€5,12" },
+      { w: "kruidvat", url: "https://www.kruidvat.nl/bausch-lomb-biotrue-multi-purpose-solution-lenzenvloeistof/p/6356215", prijs: "Biotrue ± €15" },
+    ],
+  },
+  kleur: {
+    naam: "Kleurstof", emoji: "🎨", winkels: ["jumbo", "ah"], zoek: "kleurstof dr oetker",
+    let: "Levensmiddelenkleurstof uit de bakafdeling werkt prima.",
+    links: [{ w: "jumbo", url: "https://www.jumbo.com/producten/dr-oetker-kleurstofstiften-rood-geel-blauw-45-g-515060DS", prijs: "€2,99" }],
+    zoekIn: ["ah"],
+  },
+  glitter: {
+    naam: "Glitter", emoji: "✨", winkels: ["action", "hema"], zoek: "glitter",
+    links: [{ w: "action", url: "https://www.action.com/nl-nl/p/3210785/decotime-glitterbuisjes/", prijs: "€1,99" }],
+    zoekIn: ["hema"],
+  },
+  scheerschuim: {
+    naam: "Scheerschuim (wit, geen gel)", emoji: "🫧", winkels: ["action", "etos", "kruidvat", "jumbo", "ah"], zoek: "scheerschuim",
+    links: [
+      { w: "action", url: "https://www.action.com/nl-nl/p/3223019/silea-scheerschuim/", prijs: "€2,22" },
+      { w: "etos", url: "https://www.etos.nl/producten/de-vergulde-hand-scheerschuim-250-ml-120351121.html", prijs: "€4,29" },
+    ],
+  },
+  klei: {
+    naam: "Zachte luchtdrogende klei", emoji: "🧈", winkels: ["action", "hema"], zoek: "air clay",
+    let: "Neem zachte 'air clay'. Geen polymeerklei (die moet de oven in) en geen harde boetseerklei.",
+    links: [{ w: "hema", url: "https://www.hema.nl/speelgoed-hobby/knutselen/klei/zachte-klei-pastel---4-stuks-15930037.html" }],
+    zoekIn: ["action"],
+  },
+  bolletjes: {
+    naam: "Schuimbolletjes (foam beads)", emoji: "🍬", winkels: [], zoek: "slijm foam beads",
+    zoekIn: ["amazon", "bol"],
+  },
+  sneeuw: {
+    naam: "Instant sneeuwpoeder", emoji: "❄️", winkels: [], zoek: "instant snow poeder",
+    let: "Spuitsneeuw uit de winkel werkt niet, het moet poeder zijn dat opzwelt met water.",
+    links: [
+      { w: "amazon", url: "https://www.amazon.nl/dp/B081QNRW5S", prijs: "€11,99" },
+      { w: "bol", url: "https://www.bol.com/nl/nl/p/tuban-tuban-valse-sneeuw-500-ml/9300000164078373/", prijs: "€14,50" },
+    ],
+  },
+  glow: {
+    naam: "Glow-in-the-dark poeder of verf", emoji: "🌙", winkels: [], zoek: "glow in the dark poeder",
+    links: [{ w: "bol", url: "https://www.bol.com/nl/nl/p/s-d-glow-in-the-dark-poeder-50-gram-groen-geel-mengbasis-verf-fluorescerend/9300000232354102/", prijs: "€14,95" }],
+    zoekIn: ["amazon"],
+  },
+  thermo: {
+    naam: "Thermochroom pigment", emoji: "🦎", winkels: [], zoek: "thermochroom pigment",
+    links: [{ w: "amazon", url: "https://www.amazon.nl/dp/B0CDXN91FV", prijs: "€9,29" }],
+    zoekIn: ["bol"],
+  },
+  ijzer: {
+    naam: "Zwart ijzeroxidepoeder", emoji: "⚫", winkels: [], zoek: "ijzeroxide zwart poeder",
+    links: [{ w: "amazon", url: "https://www.amazon.nl/dp/B096W9HJZ6", prijs: "€3,11" }],
+  },
+  magneet: {
+    naam: "Neodymium-magneet", emoji: "🧲", winkels: [], zoek: "neodymium magneet",
+    let: "Bewaar hem altijd buiten bereik van kleine kinderen.",
+    links: [{ w: "amazon", url: "https://www.amazon.nl/dp/B0BXM2K6S7", prijs: "€6,49" }],
+  },
+  spons: {
+    naam: "Wondersponsje (melaminespons)", emoji: "🧽", winkels: ["action", "ah", "jumbo", "kruidvat"], zoek: "wonderspons",
+    links: [{ w: "action", url: "https://www.action.com/nl-nl/p/3217021/mr-proper-wondersponzen/", prijs: "€2,99" }],
+  },
+  chia: {
+    naam: "Chiazaad", emoji: "🌱", winkels: ["action", "jumbo", "ah"], zoek: "chiazaad",
+    links: [
+      { w: "action", url: "https://www.action.com/nl-nl/p/2572286/natural-happiness-chiazaad/", prijs: "€1,33" },
+      { w: "jumbo", url: "https://www.jumbo.com/producten/jumbo-chiazaad-biologisch-275-g-483735ZK", prijs: "€3,99" },
+    ],
+  },
+  maizena: {
+    naam: "Maizena", emoji: "🌾", winkels: ["ah", "jumbo"], zoek: "maizena",
+    links: [{ w: "jumbo", url: "https://www.jumbo.com/producten/koopmans-maizena-250-g-430613PAK", prijs: "€1,49" }],
+    zoekIn: ["ah"],
+  },
+};
+
+// koppelt een ingrediëntnaam uit de recepten aan een artikel
+const ARTIKEL_VAN = [
+  [/witte PVA/i, "lijm_wit"], [/transparante PVA/i, "lijm_helder"], [/baking soda/i, "soda"],
+  [/lenzenvloeistof/i, "lens"], [/kleurstof/i, "kleur"], [/glitter/i, "glitter"], [/scheerschuim/i, "scheerschuim"],
+  [/klei/i, "klei"], [/schuimbolletjes/i, "bolletjes"], [/instant sneeuw/i, "sneeuw"], [/glow/i, "glow"],
+  [/thermochroom/i, "thermo"], [/ijzeroxide/i, "ijzer"], [/magneet/i, "magneet"], [/spons/i, "spons"],
+  [/chiazaad/i, "chia"], [/maizena/i, "maizena"],
+];
+const artikelVan = (naam) => (ARTIKEL_VAN.find(([re]) => re.test(naam)) || [])[1] || null;
+
+const PAKKETTEN = [
+  { naam: "Slijmset 4 kleuren + activator", w: "ecotastisch", url: "https://www.ecotastisch.nl/products/slijmset-4-kleuren-en-activator", prijs: "€18,95", uitleg: "Lijm en activator in één doos, genoeg voor een middag met vriendjes." },
+  { naam: "Kant-en-klare slime activator", w: "ecotastisch", url: "https://www.ecotastisch.nl/products/slijm-activator", prijs: "€3,95", uitleg: "Als je geen goede lenzenvloeistof kunt vinden." },
+  { naam: "Slijmpakketten bij Intertoys", w: "intertoys", url: "https://www.intertoys.nl/knutselartikelen/slijm", uitleg: "Ook in de winkel te koop." },
 ];

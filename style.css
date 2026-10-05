@@ -340,3 +340,5 @@ nav .teller { background: #ff4fa3; color: #fff; border-radius: 999px; padding: 0
 a.grote-knop { text-decoration: none; display: inline-block; }
 .grote-knop.vorige { background: rgba(255,255,255,.18); color: #fff; box-shadow: none; }
 .winkelpaneel { margin-top: 16px; }
+.kaart-top .label.eetbaar { background: #ff4fa3; color: #fff; }
+.waarschuwing.eetbaar-info { background: #ffe8f4; }

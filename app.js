@@ -91,6 +91,7 @@ $("#heroBlob").addEventListener("click", (e) => {
 const FILTERS = [
   { id: "alle", naam: "✨ Alles", test: () => true },
   { id: "makkelijk", naam: "🟢 Makkelijk", test: (r) => r.moeilijk === 1 },
+  { id: "eetbaar", naam: "😋 Eetbaar", test: (r) => r.eetbaar },
   { id: "zonder", naam: "🌱 Zonder activator", test: (r) => r.activator === "geen" },
   { id: "kleintjes", naam: "👶 Voor kleintjes", test: (r) => r.leeftijd <= 4 },
   { id: "snel", naam: "⚡ Binnen 15 min", test: (r) => r.minuten <= 15 },
@@ -112,7 +113,7 @@ function renderKaarten() {
     <button class="kaart" data-id="${r.id}">
       <div class="kaart-top" style="background:${r.kleur[2] || "#f6f1ff"}">
         ${staat.favorieten.includes(r.id) ? '<span class="hartje">💜</span>' : ""}
-        <span class="label">${r.activator === "geen" ? "zonder activator" : moeilijkTekst(r.moeilijk)}</span>
+        <span class="label ${r.eetbaar ? "eetbaar" : ""}">${r.eetbaar ? "😋 eetbaar" : r.activator === "geen" ? "zonder activator" : moeilijkTekst(r.moeilijk)}</span>
         <div class="klodder" style="background:${kleurVan(r)}">${r.emoji}</div>
       </div>
       <div class="kaart-body">
@@ -160,6 +161,7 @@ function renderDetail() {
         </div>
       </div>
     </div>
+    ${r.eetbaar ? `<div class="waarschuwing eetbaar-info">😋 <b>Eetbaar slijm!</b> Gebruik een schone kom en schone handen, en houd het ver weg van gewoon lijmslijm. Opeten of weggooien op dezelfde dag.${r.allergenen ? ` <br>🏷️ <b>Let op, bevat:</b> ${esc(r.allergenen)}` : ""}</div>` : ""}
     ${r.waarschuwing ? `<div class="waarschuwing">⚠️ ${esc(r.waarschuwing)}</div>` : ""}
     <div class="detail-grid">
       <div class="paneel">
@@ -394,6 +396,7 @@ const BADGES = [
   { icoon: "☁️", naam: "Wolkenmaker", uitleg: "Maak fluffy of cloud slime", test: () => staat.gemaakt.fluffy || staat.gemaakt.cloud },
   { icoon: "💎", naam: "Kristalhelder", uitleg: "Maak glitter- of clear slime", test: () => staat.gemaakt.glitter },
   { icoon: "🌱", naam: "Groene held", uitleg: "Maak een recept zonder activator", test: () => RECEPTEN.some((r) => r.activator === "geen" && staat.gemaakt[r.id]) },
+  { icoon: "😋", naam: "Smulpaap", uitleg: "Maak een eetbaar slijm", test: () => RECEPTEN.some((r) => r.eetbaar && staat.gemaakt[r.id]) },
   { icoon: "🏆", naam: "Uitdaging!", uitleg: "Maak een uitdagend recept", test: () => RECEPTEN.some((r) => r.moeilijk === 3 && staat.gemaakt[r.id]) },
   { icoon: "⭐", naam: "Perfectie", uitleg: "Geef een slijm 5 sterren", test: () => Object.values(staat.sterren).includes(5) },
   { icoon: "👑", naam: "Slijmkoning(in)", uitleg: "Maak 10 verschillende recepten", test: () => Object.keys(staat.gemaakt).length >= 10 },

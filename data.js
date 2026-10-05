@@ -287,6 +287,123 @@ const RECEPTEN = [
     fout: "Al het water tegelijk erbij. Dan wordt het soep. Te dun? Gewoon wat maizena erbij.",
     klaarTip: "Gooi oobleck nooit door de gootsteen, dat kan verstoppen. Laat het drogen en gooi het in de vuilnisbak.",
   },
+  // ---------- EETBAAR (bronnen: Little Bins, Fun with Mama, How To Cook That, Busy Little Kiddies) ----------
+  {
+    id: "spekjes", naam: "Spekjesslijm", emoji: "🍡", activator: "geen", eetbaar: true,
+    kort: "Van gesmolten spekjes. Rekken, kneden én opsmullen!",
+    kleur: ["#ffb3d1", "#ff7eb6", "#fff0f6"], moeilijk: 2, minuten: 15, leeftijd: 5,
+    allergenen: "gelatine (rund of varken, kijk op de zak). Niet vegetarisch.",
+    waarschuwing: "De gesmolten spekjes zijn heet. De volwassene doet de magnetron en voelt eerst. Niet voor peuters.",
+    ingredienten: [
+      { h: 100, e: "g", n: "spekjes of witte marshmallows", x: "± 14 stuks. Witte marshmallows geven wit slijm, spekjes worden roze." },
+      { h: 1, e: "tl", n: "zonnebloemolie" },
+      { h: 6, e: "el", n: "poedersuiker", x: "Plus extra voor je handen" },
+      { h: 1, e: "druppels", n: "kleurstof (mag ook niet)" },
+    ],
+    stappen: [
+      { i: "🥣", t: "Doe de spekjes en de olie in een kom die in de magnetron mag." },
+      { i: "🧑‍🍳", t: "Volwassene: 20 seconden in de magnetron, roeren, en nog 10 seconden.", x: "Stop zodra ze opgezwollen zijn. Te lang = hard slijm." },
+      { i: "🥄", t: "Roer er 2 eetlepels poedersuiker en eventueel kleurstof door." },
+      { i: "⏳", t: "Laat het 2 à 3 minuten afkoelen. De volwassene voelt eerst of het niet meer heet is.", timer: 150 },
+      { i: "🤲", t: "Strooi poedersuiker op je handen en kneed er steeds 1 eetlepel bij." },
+      { i: "😋", t: "Plakt het niet meer? Rekken, spelen en een hapje proeven!" },
+    ],
+    tip: "Wordt het hard? 5 à 10 seconden terug in de magnetron en het is weer zacht.",
+    fout: "Te lang in de magnetron. Dan wordt het hard en kan het aanbranden.",
+    klaarTip: "Na zo'n 20 minuten wordt spekjesslijm hard. Dat is normaal. Vandaag opeten of weggooien, en daarna tanden poetsen!",
+  },
+  {
+    id: "fluffeetbaar", naam: "Eetbaar wolkenslijm", emoji: "🍦", activator: "geen", eetbaar: true,
+    kort: "Zonder magnetron, zonder hitte. Perfect voor kleine smulpapen.",
+    kleur: ["#fff3b0", "#ffc6e0", "#fffbea"], moeilijk: 1, minuten: 10, leeftijd: 4,
+    allergenen: "ei-eiwit (kijk op de pot).",
+    ingredienten: [
+      { h: 1, e: "pot", n: "Marshmallow Fluff (213 g)", x: "Bij AH en Jumbo, bij het broodbeleg" },
+      { h: 120, e: "g", n: "poedersuiker" },
+      { h: 2, e: "druppels", n: "kleurstof (mag ook niet)" },
+    ],
+    stappen: [
+      { i: "🧼", t: "Was je handen goed en pak een schone plank." },
+      { i: "🎨", t: "Roer de kleurstof door de Fluff." },
+      { i: "🍚", t: "Strooi de helft van de poedersuiker op de plank." },
+      { i: "🍦", t: "Schep de Fluff op de poedersuiker." },
+      { i: "🤲", t: "Kneed de poedersuiker er beetje bij beetje door." },
+      { i: "😋", t: "Plakt het niet meer? Klaar om mee te spelen en van te snoepen!" },
+    ],
+    tip: "Een druppeltje olie op je handen helpt tegen plakken.",
+    fout: "Alle poedersuiker in één keer erbij. Dan wordt het kruimelig.",
+    klaarTip: "Vandaag opeten of weggooien. Het is bijna puur suiker, dus een paar hapjes is genoeg!",
+  },
+  {
+    id: "beertjes", naam: "Gummibeertjesslijm", emoji: "🐻", activator: "geen", eetbaar: true,
+    kort: "Van gesmolten beertjes. Het meest rekbare eetbare slijm.",
+    kleur: ["#ff6b6b", "#ffd23f", "#fff2ea"], moeilijk: 2, minuten: 15, leeftijd: 6,
+    allergenen: "gelatine (vaak varken, kijk op de zak). Niet vegetarisch, niet altijd halal.",
+    waarschuwing: "Gesmolten beertjes worden heel heet en blijven lang heet. Alleen de volwassene doet de magnetron en roert het koel.",
+    ingredienten: [
+      { h: 150, e: "g", n: "gummibeertjes (bv. Haribo Goudbeertjes)", x: "Liefst één kleur, anders wordt het bruin" },
+      { h: 2, e: "el", n: "maizena" },
+      { h: 1, e: "el", n: "poedersuiker" },
+      { h: 0.5, e: "el", n: "zonnebloemolie" },
+    ],
+    stappen: [
+      { i: "🐻", t: "Zoek de beertjes uit per kleur en doe ze in een kom die in de magnetron mag." },
+      { i: "🧑‍🍳", t: "Volwassene: 30 seconden in de magnetron, roeren, en nog 10 à 30 seconden tot alles gesmolten is." },
+      { i: "⏳", t: "Volwassene: roer het 3 à 5 minuten koel. Niet aankomen, het is heet!", timer: 240 },
+      { i: "🍚", t: "Meng de maizena en poedersuiker en strooi de helft op een plank." },
+      { i: "🤲", t: "Leg de massa erop en kneed de rest van het poeder erdoor." },
+      { i: "💧", t: "Kneed er beetje bij beetje de olie door, dan wordt het lekker rekbaar." },
+    ],
+    tip: "Maak verschillende kleuren apart en draai ze daarna samen tot een regenboog.",
+    fout: "Te vroeg aanraken. Gesmolten snoep blijft heel lang heet.",
+    klaarTip: "Je kunt het één keer opnieuw opwarmen. Proeven mag, maar door de rauwe maizena is het geen snack.",
+  },
+  {
+    id: "nutella", naam: "Choco-spekjesslijm", emoji: "🍫", activator: "geen", eetbaar: true,
+    kort: "Spekjesslijm met hazelnootpasta. Ruikt naar chocola!",
+    kleur: ["#a0522d", "#5c2e14", "#f8eee6"], moeilijk: 2, minuten: 15, leeftijd: 5,
+    allergenen: "noten (hazelnoot), melk, soja en gelatine.",
+    waarschuwing: "Bevat noten! Niet maken als er iemand met een notenallergie meedoet. De volwassene doet de magnetron.",
+    ingredienten: [
+      { h: 100, e: "g", n: "spekjes of witte marshmallows" },
+      { h: 1, e: "el", n: "hazelnootpasta (Nutella)" },
+      { h: 1, e: "tl", n: "zonnebloemolie" },
+      { h: 8, e: "el", n: "poedersuiker", x: "Plus extra voor je handen" },
+    ],
+    stappen: [
+      { i: "🥣", t: "Doe de spekjes en de olie in een kom die in de magnetron mag." },
+      { i: "🧑‍🍳", t: "Volwassene: 20 seconden in de magnetron, roeren, en nog 10 seconden." },
+      { i: "🍫", t: "Roer de hazelnootpasta erdoor." },
+      { i: "⏳", t: "Laat het 2 à 3 minuten afkoelen. De volwassene voelt eerst.", timer: 150 },
+      { i: "🤲", t: "Kneed er met bepoederde handen steeds 1 eetlepel poedersuiker door." },
+      { i: "😋", t: "Plakt het niet meer? Klaar!" },
+    ],
+    tip: "Wordt het hard? 5 à 10 seconden terug in de magnetron.",
+    fout: "Te veel Nutella. Dan wordt het vet en rekt het niet meer.",
+    klaarTip: "Vandaag opeten of weggooien, en daarna tanden poetsen!",
+  },
+  {
+    id: "pudding", naam: "Puddingslijm", emoji: "🍮", activator: "geen", eetbaar: true,
+    kort: "Ruikt naar vanillepudding. Proefveilig, zonder hitte.",
+    kleur: ["#ffe9a8", "#f7b267", "#fffaee"], moeilijk: 1, minuten: 10, leeftijd: 4,
+    allergenen: "mogelijk melk (kijk op het pakje).",
+    waarschuwing: "Proefveilig, maar niet om op te eten: er zit rauwe maizena in en het smaakt expres niet zo lekker.",
+    ingredienten: [
+      { h: 4, e: "el", n: "kloppuddingpoeder (bv. Dr. Oetker Kloppudding)", x: "± een half zakje" },
+      { h: 130, e: "g", n: "maizena" },
+      { h: 80, e: "ml", n: "warm water uit de kraan" },
+    ],
+    stappen: [
+      { i: "🥣", t: "Klop het puddingpoeder en de helft van de maizena door elkaar." },
+      { i: "🚰", t: "Giet het warme water erbij en roer tot het zwaar wordt." },
+      { i: "🤲", t: "Kneed de rest van de maizena erdoor." },
+      { i: "⚖️", t: "Te plakkerig? Meer maizena. Te droog? Een paar druppels water." },
+      { i: "👃", t: "Ruik eens: vanille! Nu kneden en spelen." },
+    ],
+    tip: "Probeer ook chocolade- of aardbeienpudding voor een andere kleur en geur.",
+    fout: "Alle maizena in één keer erbij. Doe het in twee keer.",
+    klaarTip: "Bewaar het in een dicht bakje in de koelkast. Je kunt er 1 à 2 keer mee spelen. Schimmel? Weggooien.",
+  },
 ];
 
 const PROBLEMEN = [
@@ -477,6 +594,34 @@ const ARTIKELEN = {
     naam: "Wondersponsje (melaminespons)", emoji: "🧽", winkels: ["action", "ah", "jumbo", "kruidvat"], zoek: "wonderspons",
     links: [{ w: "action", url: "https://www.action.com/nl-nl/p/3217021/mr-proper-wondersponzen/", prijs: "€2,99" }],
   },
+  spekjes: {
+    naam: "Spekjes of witte marshmallows", emoji: "🍡", winkels: ["ah", "jumbo", "action", "hema"], zoek: "marshmallows",
+    let: "Haribo Chamallows zijn met rundergelatine. Witte marshmallows geven wit slijm.",
+    links: [{ w: "jumbo", url: "https://www.jumbo.com/producten/haribo-chamallows-70-g-603672ZK" }],
+    zoekIn: ["ah"],
+  },
+  fluff: {
+    naam: "Marshmallow Fluff", emoji: "🍦", winkels: ["ah", "jumbo"], zoek: "marshmallow fluff",
+    links: [{ w: "jumbo", url: "https://www.jumbo.com/producten/fluff-marshmallow-213-g-589493POT" }],
+    zoekIn: ["ah"],
+  },
+  poedersuiker: {
+    naam: "Poedersuiker", emoji: "🍚", winkels: ["ah", "jumbo"], zoek: "poedersuiker", zoekIn: ["ah", "jumbo"],
+  },
+  beertjes: {
+    naam: "Gummibeertjes", emoji: "🐻", winkels: ["ah", "jumbo", "action", "kruidvat"], zoek: "haribo goudbeertjes", zoekIn: ["ah", "jumbo"],
+  },
+  hazelnoot: {
+    naam: "Hazelnootpasta (Nutella)", emoji: "🍫", winkels: ["ah", "jumbo"], zoek: "nutella", zoekIn: ["ah", "jumbo"],
+  },
+  pudding: {
+    naam: "Dr. Oetker Kloppudding", emoji: "🍮", winkels: ["ah", "jumbo"], zoek: "kloppudding",
+    links: [{ w: "ah", url: "https://www.ah.nl/producten/product/wi171335/dr-oetker-kloppudding-vanillesmaak" }],
+    zoekIn: ["jumbo"],
+  },
+  olie: {
+    naam: "Zonnebloemolie", emoji: "🌻", winkels: ["ah", "jumbo"], zoek: "zonnebloemolie", zoekIn: ["ah", "jumbo"],
+  },
   chia: {
     naam: "Chiazaad", emoji: "🌱", winkels: ["action", "jumbo", "ah"], zoek: "chiazaad",
     links: [
@@ -497,7 +642,9 @@ const ARTIKEL_VAN = [
   [/lenzenvloeistof/i, "lens"], [/kleurstof/i, "kleur"], [/glitter/i, "glitter"], [/scheerschuim/i, "scheerschuim"],
   [/klei/i, "klei"], [/schuimbolletjes/i, "bolletjes"], [/instant sneeuw/i, "sneeuw"], [/glow/i, "glow"],
   [/thermochroom/i, "thermo"], [/ijzeroxide/i, "ijzer"], [/magneet/i, "magneet"], [/spons/i, "spons"],
-  [/chiazaad/i, "chia"], [/maizena/i, "maizena"],
+  [/chiazaad/i, "chia"], [/maizena/i, "maizena"], [/spekjes/i, "spekjes"], [/Fluff/, "fluff"],
+  [/poedersuiker/i, "poedersuiker"], [/gummibeertjes/i, "beertjes"], [/hazelnoot/i, "hazelnoot"],
+  [/kloppudding/i, "pudding"], [/zonnebloemolie/i, "olie"],
 ];
 const artikelVan = (naam) => (ARTIKEL_VAN.find(([re]) => re.test(naam)) || [])[1] || null;
 

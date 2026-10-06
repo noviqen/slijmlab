@@ -447,3 +447,6 @@ const PAKKETTEN = [
   { naam: "Kant-en-klare slime activator", w: "ecotastisch", url: "https://www.ecotastisch.nl/products/slijm-activator", prijs: "€3,95", uitleg: "Als je geen goede lenzenvloeistof kunt vinden." },
   { naam: "Slijmpakketten bij Intertoys", w: "intertoys", url: "https://www.intertoys.nl/knutselartikelen/slijm", uitleg: "Ook in de winkel te koop." },
 ];
+
+// Link naar het Slijmfeestje-pakket (Etsy). Leeg = knop verborgen.
+const FEESTPAKKET_URL = "";

@@ -344,3 +344,6 @@ a.grote-knop { text-decoration: none; display: inline-block; }
 .waarschuwing.eetbaar-info { background: #ffe8f4; }
 .tipkaart.bron { background: #eef6ff; }
 .tipkaart.bron a { color: var(--paars); font-weight: 700; }
+.feest-banner { margin-top: 20px; background: #fff; border-radius: 24px; padding: 16px 20px; box-shadow: var(--schaduw); display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.feest-banner .groot { font-size: 2.6rem; }
+.feest-banner div { flex: 1; min-width: 200px; }

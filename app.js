@@ -106,6 +106,13 @@ $("#filters").addEventListener("click", (e) => {
   const b = e.target.closest("button"); if (!b) return;
   actiefFilter = b.dataset.f; renderFilters(); renderKaarten();
 });
+function renderFeestBanner() {
+  const el = $("#feestBanner");
+  if (!FEESTPAKKET_URL) { el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = `<div class="feest-banner"><span class="groot">🎉</span><div><b>Slijmfeestje geven?</b><br>Compleet draaiboek met boodschappenlijst, uitnodigingen en diploma's om te printen.</div>
+    <a class="grote-knop roze" href="${esc(FEESTPAKKET_URL)}" target="_blank" rel="noopener noreferrer">Bekijk het pakket ↗</a></div>`;
+}
 function renderKaarten() {
   const f = FILTERS.find((x) => x.id === actiefFilter);
   const lijst = RECEPTEN.filter(f.test);
@@ -579,6 +586,7 @@ $("#boodschappenInhoud").addEventListener("click", async (e) => {
 
 // ---------- start ----------
 renderFilters();
+renderFeestBanner();
 renderKaarten();
 renderProblemen();
 renderBasis();

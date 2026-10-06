@@ -3,7 +3,7 @@
 // One Little Project, Best Ideas for Kids, RIVM-beoordeling borax in slijm (2019). Zie README.md.
 
 const LENS = "lenzenvloeistof met boorzuur";
-const LENS_X = "Op het etiket moet 'boorzuur' of 'borax' staan (bv. Etos All-in-1 of Biotrue). Kruidvat Opticare werkt níet: daar zit geen boorzuur in";
+const LENS_X = "Op het etiket moet 'boorzuur' of 'borax' staan (bv. Etos All-in-1 of Biotrue). Kruidvat Opticare en de Jumbo all-in-one (zachte én harde lenzen) werken níet: daar zit geen boorzuur in";
 const SODA = "baking soda (zuiveringszout)";
 const SODA_X = "Geen bakpoeder! Dat is iets anders.";
 
@@ -302,7 +302,7 @@ const BASIS = [
 ];
 
 const ACTIVATORS = [
-  { naam: "✅ Lenzenvloeistof + baking soda", hoe: "1 el lenzenvloeistof + ½ el baking soda per flesje lijm (Elmer's)", voor: "Alle recepten. Onze favoriet!", let: "Er moet 'boorzuur' of 'borax' op het etiket staan. Bv. Etos All-in-1 of Biotrue. Kruidvat Opticare heeft géén boorzuur." },
+  { naam: "✅ Lenzenvloeistof + baking soda", hoe: "1 el lenzenvloeistof + ½ el baking soda per flesje lijm (Elmer's)", voor: "Alle recepten. Onze favoriet!", let: "Er moet 'boorzuur' of 'borax' op het etiket staan. Bv. Etos All-in-1 of Biotrue. Kruidvat Opticare en de Jumbo all-in-one (zachte én harde lenzen) hebben géén boorzuur." },
   { naam: "🟡 Kant-en-klare slime activator", hoe: "Volgens de verpakking", voor: "Handig, zit ook in slijmpakketjes", let: "Kies een product met CE-keurmerk." },
   { naam: "🔴 Boraxpoeder", hoe: "Niet aanbevolen", voor: "-", let: "In de EU aangemerkt als schadelijk. De meeste huidproblemen door slijm komen van borax." },
   { naam: "🔴 Wasmiddel", hoe: "Niet aanbevolen", voor: "-", let: "Werkt alleen als er borax in zit (vaak niet meer). Kan de huid irriteren." },
@@ -371,7 +371,7 @@ const ARTIKELEN = {
   },
   lens: {
     naam: "Lenzenvloeistof met boorzuur", emoji: "💧", winkels: ["etos", "ah"], zoek: "lenzenvloeistof all-in-1",
-    let: "Etos All-in-1 heeft boorzuur (ook bij AH te koop). Kruidvat Opticare NIET. Twijfel? Kijk of er 'boorzuur' of 'borax' op staat.",
+    let: "Etos All-in-1 heeft boorzuur (ook bij AH te koop). Kruidvat Opticare en Jumbo all-in-one (zacht én hard) NIET. Twijfel? Kijk of er 'boorzuur' of 'borax' op staat.",
     links: [
       { w: "etos", url: "https://www.etos.nl/producten/etos-zachte-lenzen-all-in-1-vloeistof-360-ml-120288475.html", prijs: "€5,12" },
       { w: "kruidvat", url: "https://www.kruidvat.nl/bausch-lomb-biotrue-multi-purpose-solution-lenzenvloeistof/p/6356215", prijs: "Biotrue ± €15" },

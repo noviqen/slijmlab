@@ -355,7 +355,7 @@ const ARTIKELEN = {
   },
   lijm_helder: {
     naam: "Transparante PVA-lijm", emoji: "🫙", winkels: ["hema"], zoek: "kinderlijm transparant",
-    let: "Op het etiket moet PVA of 'op waterbasis' staan. Transparant = doorzichtig slijm, mooi met glitter.",
+    let: "Op het etiket moet PVA of 'op waterbasis' staan. Transparant = doorzichtig slijm, mooi met glitter. HEMA kinderlijm (waterbasis, 100 ml) werkt: HEMA gebruikt hem zelf in hun slijmrecept. Voor 120 ml heb je 2 flesjes nodig.",
     links: [
       { w: "hema", url: "https://www.hema.nl/speelgoed-hobby/knutselen/lijm/kinderlijm-200ml-15900626.html", prijs: "€3,69" },
       { w: "bol", url: "https://www.bol.com/nl/nl/p/collall-kinderlijm-transparant-1000-ml-geschikt-voor-het-maken-van-slijm/9200000066094139/", prijs: "± €15 / liter" },

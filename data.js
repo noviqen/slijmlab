@@ -15,7 +15,7 @@ const RECEPTEN = [
     bron: [{ naam: "Elmer's (officieel recept)", url: "https://www.survivingateacherssalary.com/diy-worry-free-slime-recipe-kids-elmers-recipe/" }],
     bewijs: "114 reacties, veel 'werkte perfect'. Mislukte het, dan zat er geen boorzuur in de lenzenvloeistof",
     ingredienten: [
-      { h: 118, e: "ml", n: "witte PVA-kinderlijm", x: "1 flesje van ± 120 ml. Geen lijmstift!" },
+      { h: 118, e: "ml", n: "witte PVA-kinderlijm", x: "Moet PVA zijn, anders wordt het geen slijm. Wit geeft romig slijm. 1 flesje van ± 120 ml." },
       { h: 0.5, e: "el", n: SODA, x: SODA_X },
       { h: 1, e: "el", n: LENS, x: LENS_X + ". Houd er nog wat extra bij." },
       { h: 2, e: "druppels", n: "kleurstof (mag ook niet)" },
@@ -38,7 +38,7 @@ const RECEPTEN = [
     bron: [{ naam: "Best Ideas for Kids", url: "https://www.thebestideasforkids.com/fluffy-slime-recipe/" }],
     bewijs: "4,95 van 5 sterren uit 128 beoordelingen en 234 reacties",
     ingredienten: [
-      { h: 160, e: "ml", n: "witte PVA-kinderlijm" },
+      { h: 160, e: "ml", n: "witte PVA-kinderlijm", x: "Moet PVA zijn. Dit recept is getest met witte lijm, dat geeft romig slijm." },
       { h: 60, e: "ml", n: "water" },
       { h: 0.5, e: "tl", n: SODA, x: SODA_X },
       { h: 600, e: "ml", n: "scheerschuim", x: "480 tot 720 ml (2 à 3 kopjes). Schuim, géén gel." },
@@ -67,7 +67,7 @@ const RECEPTEN = [
     ],
     bewijs: "257 reacties, waaronder 'this worked perfectly for us'",
     ingredienten: [
-      { h: 120, e: "ml", n: "transparante PVA-lijm", x: "Bv. HEMA kinderlijm transparant of Collall transparant" },
+      { h: 120, e: "ml", n: "transparante PVA-lijm", x: "Moet PVA zijn. Transparant geeft doorzichtig slijm, mooi met glitter. Bv. HEMA of Collall transparant." },
       { h: 120, e: "ml", n: "water" },
       { h: 0.5, e: "tl", n: SODA, x: SODA_X + " Een kwart theelepel mag ook." },
       { h: 1, e: "el", n: LENS, x: LENS_X },
@@ -309,11 +309,12 @@ const ACTIVATORS = [
 ];
 
 const LIJM = [
-  "Witte of transparante PVA-kinderlijm werkt het beste.",
-  "Witte kinderlijm of schoollijm van HEMA, Action of Collall wordt het meest gebruikt.",
-  "HEMA kinderlijm transparant en Collall kinderlijm transparant zijn goed voor helder slijm.",
-  "Lijmstiften en secondelijm werken NIET.",
-  "Witte lijm = romig slijm. Transparante lijm = helder slijm.",
+  "Het moet PVA-lijm zijn. PVA zit vol lange sliertjes die de lenzenvloeistof aan elkaar knoopt. Zo wordt lijm slijm.",
+  "Herken je PVA aan 'PVA' of 'op waterbasis' op het etiket. Kinderlijm en schoollijm zijn bijna altijd PVA.",
+  "Witte PVA-lijm geeft romig slijm met zachte pastelkleuren (bv. HEMA, Action of Collall).",
+  "Transparante PVA-lijm geeft doorzichtig slijm, mooi met glitter (bv. HEMA of Collall transparant).",
+  "Gebruik de lijm die bij het recept staat: zo is het recept getest.",
+  "Lijmstift, secondelijm, houtlijm en lijm uit een lijmpistool werken NIET.",
 ];
 
 const VEILIG = [
@@ -346,7 +347,7 @@ const WINKELS = {
 const ARTIKELEN = {
   lijm_wit: {
     naam: "Witte PVA-kinderlijm", emoji: "🧴", winkels: ["hema", "action", "xenos"], zoek: "kinderlijm wit",
-    let: "Op het etiket moet PVA of 'op waterbasis' staan. Groot gezin? Een literfles is voordeliger.",
+    let: "Op het etiket moet PVA of 'op waterbasis' staan. Wit = romig slijm. Groot gezin? Een literfles is voordeliger.",
     links: [
       { w: "bol", url: "https://www.bol.com/nl/nl/p/lijm-wit-op-waterbasis-1-liter-ook-voor-drakenslijm-of-smurfensnot/9200000090032706/", prijs: "1 liter" },
     ],
@@ -354,6 +355,7 @@ const ARTIKELEN = {
   },
   lijm_helder: {
     naam: "Transparante PVA-lijm", emoji: "🫙", winkels: ["hema"], zoek: "kinderlijm transparant",
+    let: "Op het etiket moet PVA of 'op waterbasis' staan. Transparant = doorzichtig slijm, mooi met glitter.",
     links: [
       { w: "hema", url: "https://www.hema.nl/speelgoed-hobby/knutselen/lijm/kinderlijm-200ml-15900626.html", prijs: "€3,69" },
       { w: "bol", url: "https://www.bol.com/nl/nl/p/collall-kinderlijm-transparant-1000-ml-geschikt-voor-het-maken-van-slijm/9200000066094139/", prijs: "± €15 / liter" },

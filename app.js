@@ -582,7 +582,8 @@ function lijstData() {
 }
 function hoeveelTekst(it) {
   if (!it.optel || !it.h || !it.e) return "";
-  if (it.e === "ml" && /lijm/.test(it.k)) return `${getal(it.h)} ml (± ${Math.ceil(it.h / 120)} flesje${it.h > 120 ? "s" : ""})`;
+  if (it.e === "ml" && it.k === "lijm_helder") return `${getal(it.h)} ml (${Math.ceil(it.h / 100)} HEMA-flesje${it.h > 100 ? "s" : ""} van 100 ml)`;
+  if (it.e === "ml" && it.k === "lijm_wit") return `${getal(it.h)} ml (1 grote fles is genoeg voor ${Math.floor(946 / it.h)}×)`;
   if (it.e === "druppels") return "";
   return `${getal(it.h)} ${it.e}`;
 }

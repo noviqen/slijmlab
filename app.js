@@ -243,7 +243,7 @@ $("#detailInhoud").addEventListener("click", (e) => {
 // welke ingrediënten noemt deze stap? (dan tonen we de hoeveelheid erbij)
 const STAP_WOORD = { lijm_wit: /lijm/i, lijm_helder: /lijm/i, glow: /lijm/i, soda: /baking soda/i, lens: /lenzenvloeistof/i,
   kleur: /kleur/i, glitter: /glitter/i, scheerschuim: /scheerschuim/i, chia: /chiazaad/i, maizena: /maizena/i,
-  poedersuiker: /poedersuiker/i, olie: /olie/i, spekjes: /marshmallows/i, fluff: /fluff/i, beertjes: /beertjes/i };
+  poedersuiker: /poedersuiker/i, olie: /olie/i, modelmagic: /klei/i, babyolie: /babyolie/i, lotion: /lotion/i, spekjes: /marshmallows/i, fluff: /fluff/i, beertjes: /beertjes/i };
 function stapIngredienten(r, s) {
   if (/\d|halve|kwart|anderhalve/i.test(s.t)) return [];   // stap noemt zelf al een hoeveelheid
   if (/^(te |nog te |plakt)/i.test(s.t)) return [];          // bijstuur-tip, geen hoofdhoeveelheid

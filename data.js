@@ -90,6 +90,33 @@ const RECEPTEN = [
     fout: "Te snel te veel lenzenvloeistof. Dan wordt het rubber. Beetje bij beetje!",
   },
   {
+    id: "butter", naam: "Butter slijm", emoji: "🧈", activator: "lens",
+    kort: "Zacht, romig slijm met klei erin. Plakt bijna niet aan je handen.",
+    kleur: ["#ffe27a", "#ffb84d", "#fffaea"], moeilijk: 2, minuten: 20, leeftijd: 6,
+    bron: [{ naam: "Best Ideas for Kids", url: "https://www.thebestideasforkids.com/butter-slime/" }],
+    bewijs: "39 reacties, waaronder 'THE BEST slime recipe EVER… the only one that doesn't stick to my kids hands' en 'fantastic the first time'",
+    ingredienten: [
+      { h: 236, e: "ml", g: 248, n: "witte PVA-kinderlijm", x: "Moet PVA zijn. Een heel flesje van 8 oz (Elmer's)" },
+      { h: 1, e: "tl", g: 4.8, n: SODA, x: SODA_X },
+      { h: 3, e: "el", n: "water" },
+      { h: 1, e: "tl", n: "babyolie" },
+      { h: 2, e: "el", n: "babylotion of handcrème" },
+      { h: 1, e: "el", n: LENS, x: LENS_X },
+      { h: 28, e: "g", n: "Crayola Model Magic (klei)", x: "Ongeveer een kwart van een pakje. Gele klei geeft meteen botergeel slijm. Andere klei werkt volgens de reacties níet." },
+    ],
+    stappen: [
+      { i: "🥣", t: "Doe de lijm in een kom." },
+      { i: "🧂", t: "Roer de baking soda erdoor." },
+      { i: "🚰", t: "Doe het water erbij en meng goed." },
+      { i: "🧴", t: "Doe de babyolie en de lotion erbij en roer." },
+      { i: "💧", t: "Volwassene: doe 1 eetlepel lenzenvloeistof erbij en meng.", timer: 60 },
+      { i: "🤲", t: "Stort het op tafel. Het is nog plakkerig. Leg een stukje klei erop, vouw het dicht en kneed." },
+      { i: "🧈", t: "Doe de rest van de klei er beetje bij beetje bij en kneed tot het voelt als gewoon slijm.", timer: 180 },
+    ],
+    tip: "Te stijf geworden? Kneed er een beetje lotion door. Bewaar het in een luchtdichte bak, dan blijft het ongeveer een week goed.",
+    fout: "Andere klei gebruiken dan Model Magic. Volgens de reacties werkt dat niet: het wordt een klonterige massa.",
+  },
+  {
     id: "glow", naam: "Glow-in-the-dark", emoji: "🌙", activator: "lens",
     kort: "Licht op in het donker. Perfect voor een slaapfeestje!",
     kleur: ["#b8ff5e", "#2fd0e0", "#f3ffe6"], moeilijk: 1, minuten: 10, leeftijd: 6,
@@ -407,6 +434,17 @@ const ARTIKELEN = {
     let: "Niet in Nederlandse winkels te koop, wel online. Kijk of hij op voorraad is.",
     links: [{ w: "bol", url: "https://www.bol.com/nl/nl/p/glow-in-the-dark-lijm-naturel/9200000092106574/", prijs: "± €15,99" }],
   },
+  modelmagic: {
+    naam: "Crayola Model Magic (geel)", emoji: "🧈", winkels: [], zoek: "crayola model magic",
+    let: "Alleen Model Magic is bewezen voor butter slijm. Een pakje van 113 g is genoeg voor ongeveer 4 keer.",
+    links: [{ w: "bol", url: "https://www.bol.com/nl/nl/p/vivid-57-4434-e-000-materiaal-voor-pottenbakken-en-boetseren-geel-120-g/9300000007135636/", prijs: "113 g, geel" }],
+  },
+  babyolie: {
+    naam: "Babyolie", emoji: "🍼", winkels: ["kruidvat", "etos", "jumbo"], zoek: "babyolie", zoekIn: ["jumbo"],
+  },
+  lotion: {
+    naam: "Babylotion of handcrème", emoji: "🧴", winkels: ["kruidvat", "etos", "jumbo"], zoek: "bodylotion", zoekIn: ["jumbo"],
+  },
   spekjes: {
     naam: "Spekjes of witte marshmallows", emoji: "🍡", winkels: ["ah", "jumbo", "action", "hema"], zoek: "marshmallows",
     let: "Haribo Chamallows zijn met rundergelatine. Witte marshmallows geven wit slijm.",
@@ -447,7 +485,7 @@ const ARTIKEL_VAN = [
   [/lenzenvloeistof/i, "lens"], [/kleurstof/i, "kleur"], [/glitter/i, "glitter"], [/scheerschuim/i, "scheerschuim"],
   [/chiazaad/i, "chia"], [/maizena/i, "maizena"], [/marshmallows/i, "spekjes"], [/Fluff/, "fluff"],
   [/poedersuiker/i, "poedersuiker"], [/gummibeertjes/i, "beertjes"],
-  [/zonnebloemolie/i, "olie"],
+  [/zonnebloemolie/i, "olie"], [/model magic/i, "modelmagic"], [/babyolie/i, "babyolie"], [/lotion/i, "lotion"],
 ];
 const artikelVan = (naam) => (ARTIKEL_VAN.find(([re]) => re.test(naam)) || [])[1] || null;
 

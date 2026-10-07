@@ -75,7 +75,7 @@ function piep(freqs = [660, 880], duur = 0.12) {
 const slurp = () => piep([300, 220, 160], 0.09);
 
 // ---------- voorlezen (vooraf gemaakte mp3's, ElevenLabs-stem Roos) ----------
-const AUDIO_V = 1;
+const AUDIO_V = 2;
 const stem = new Audio();
 function spreek(naam) {
   if (!staat.voorlezen) return;
@@ -140,6 +140,7 @@ function renderKaarten() {
         <div class="meta">
           <span class="pil">⏱ ${r.minuten} min</span>
           <span class="pil groen">👧 ${r.leeftijd}+</span>
+          ${r.getest ? '<span class="pil getest">🧪 getest</span>' : ""}
           ${staat.gemaakt[r.id] ? `<span class="gemaakt-stempel">✔ ${staat.gemaakt[r.id]}× gemaakt ${staat.sterren[r.id] ? sterrenTekst(staat.sterren[r.id]) : ""}</span>` : ""}
         </div>
       </div>
@@ -203,6 +204,7 @@ function renderDetail() {
         <ol class="stappen-lijst">${r.stappen.map((s) => `<li><span>${esc(s.t)}</span></li>`).join("")}</ol>
         <div class="tipkaart tip"><b>💡 Tip</b>${esc(r.tip)}</div>
         <div class="tipkaart fout"><b>🙈 Meest gemaakte fout</b>${esc(r.fout)}</div>
+        ${r.getest ? `<div class="tipkaart getest"><b>🧪 Zelf getest</b>${esc(r.getest)}</div>` : ""}
         ${r.bron ? `<div class="tipkaart bron"><b>✅ Bewezen recept</b>Overgenomen uit ${r.bron.map((b) => `<a href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">${esc(b.naam)}</a>`).join(" en ")}${r.bewijs ? `. ${esc(r.bewijs)}` : ""}. Alleen de maten zijn omgerekend naar ml en lepels.</div>` : ""}
       </div>
     </div>
@@ -238,6 +240,19 @@ $("#detailInhoud").addEventListener("click", (e) => {
 });
 
 // ---------- STAP-VOOR-STAP ----------
+// welke ingrediënten noemt deze stap? (dan tonen we de hoeveelheid erbij)
+const STAP_WOORD = { lijm_wit: /lijm/i, lijm_helder: /lijm/i, glow: /lijm/i, soda: /baking soda/i, lens: /lenzenvloeistof/i,
+  kleur: /kleur/i, glitter: /glitter/i, scheerschuim: /scheerschuim/i, chia: /chiazaad/i, maizena: /maizena/i,
+  poedersuiker: /poedersuiker/i, olie: /olie/i, spekjes: /marshmallows/i, fluff: /fluff/i, beertjes: /beertjes/i };
+function stapIngredienten(r, s) {
+  if (/\d|halve|kwart|anderhalve/i.test(s.t)) return [];   // stap noemt zelf al een hoeveelheid
+  if (/^(te |nog te |plakt)/i.test(s.t)) return [];          // bijstuur-tip, geen hoofdhoeveelheid
+  return r.ingredienten.filter((ing) => {
+    const k = artikelVan(ing.n);
+    const woord = k ? STAP_WOORD[k] : /^water$|^warm water$/i.test(ing.n) ? /water/i : null;
+    return woord && woord.test(s.t) && ing.h != null;
+  });
+}
 let stapIndex = 0;
 let timer = null, timerRest = 0, timerTotaal = 0;
 function startStappen() {
@@ -269,6 +284,8 @@ function renderStap() {
         <div class="stapicoon">${s.i || "👉"}</div>
         <div class="staptekst">${esc(s.t)}</div>
         ${s.x ? `<div class="stapextra">${esc(s.x)}</div>` : ""}
+        ${(() => { const f = staat.porties, lijst = stapIngredienten(r, s); return lijst.length ? `<div class="stapnodig">${lijst.map((ing) =>
+          `<span>${esc(hoeveelheid(ing, ing.vast ? 1 : f))}${ing.g ? ` · ± ${gram(ing.g * (ing.vast ? 1 : f))} g` : ""} <b>${esc(ing.n.replace(/ \(.*\)$/, ""))}</b></span>`).join("")}</div>` : ""; })()}
         ${s.timer ? `
           <div class="timer">
             <div class="timer-ring">

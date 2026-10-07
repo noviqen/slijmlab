@@ -363,3 +363,8 @@ a.grote-knop { text-decoration: none; display: inline-block; }
 .overtypen textarea { width: 100%; margin-top: 8px; border: 2px solid #e4d9ff; border-radius: 14px; padding: 10px; font: inherit; }
 .ingredienten .gram { display: block; font-size: .85rem; font-weight: 700; color: #0b8a63; }
 .ingredienten .hoeveel { white-space: nowrap; }
+.stapnodig { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 4px; }
+.stapnodig span { background: #f2ecff; color: var(--paars); border-radius: 14px; padding: 6px 12px; font-size: 1.05rem; font-weight: 700; }
+.stapnodig b { color: var(--tekst); font-weight: 600; }
+.tipkaart.getest { background: #e8fff0; }
+.pil.getest { background: #e8fff0; color: #0b8a63; }

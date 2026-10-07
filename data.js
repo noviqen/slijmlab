@@ -67,7 +67,7 @@ const RECEPTEN = [
     ],
     bewijs: "257 reacties, waaronder 'this worked perfectly for us'",
     ingredienten: [
-      { h: 120, e: "ml", n: "transparante PVA-lijm", x: "Moet PVA zijn. Transparant geeft doorzichtig slijm, mooi met glitter. Bv. HEMA of Collall transparant." },
+      { h: 120, e: "ml", n: "transparante PVA-lijm", x: "Moet PVA zijn. Transparant geeft doorzichtig slijm, mooi met glitter. Bv. HEMA kinderlijm (2 flesjes van 100 ml)." },
       { h: 120, e: "ml", n: "water" },
       { h: 0.5, e: "tl", n: SODA, x: SODA_X + " Een kwart theelepel mag ook." },
       { h: 1, e: "el", n: LENS, x: LENS_X },
@@ -311,8 +311,8 @@ const ACTIVATORS = [
 const LIJM = [
   "Het moet PVA-lijm zijn. PVA zit vol lange sliertjes die de lenzenvloeistof aan elkaar knoopt. Zo wordt lijm slijm.",
   "Herken je PVA aan 'PVA' of 'op waterbasis' op het etiket. Kinderlijm en schoollijm zijn bijna altijd PVA.",
-  "Witte PVA-lijm geeft romig slijm met zachte pastelkleuren (bv. HEMA, Action of Collall).",
-  "Transparante PVA-lijm geeft doorzichtig slijm, mooi met glitter (bv. HEMA of Collall transparant).",
+  "Witte PVA-lijm geeft romig slijm met zachte pastelkleuren (bv. Elmer's of Collall Schoollijm wit, online via bol.com).",
+  "Transparante PVA-lijm geeft doorzichtig slijm, mooi met glitter (bv. HEMA kinderlijm of Collall transparant).",
   "Gebruik de lijm die bij het recept staat: zo is het recept getest.",
   "Lijmstift, secondelijm, houtlijm en lijm uit een lijmpistool werken NIET.",
 ];
@@ -346,27 +346,29 @@ const WINKELS = {
 // winkels: fysieke winkels, beste eerst. links: gecontroleerde productpagina's. zoekIn: extra zoeklinks.
 const ARTIKELEN = {
   lijm_wit: {
-    naam: "Witte PVA-kinderlijm", emoji: "🧴", winkels: ["hema", "action", "xenos"], zoek: "kinderlijm wit",
-    let: "Op het etiket moet PVA of 'op waterbasis' staan. Wit = romig slijm. Groot gezin? Een literfles is voordeliger.",
+    naam: "Witte PVA-kinderlijm", emoji: "🧴", winkels: [], zoek: "witte pva lijm",
+    let: "In de winkel vonden we geen witte PVA-lijm: HEMA, Action en Xenos hebben alleen doorzichtige lijm. Elmer's is precies de lijm uit het recept.",
     links: [
-      { w: "bol", url: "https://www.bol.com/nl/nl/p/lijm-wit-op-waterbasis-1-liter-ook-voor-drakenslijm-of-smurfensnot/9200000090032706/", prijs: "1 liter" },
+      { w: "bol", url: "https://www.bol.com/nl/nl/p/elmer-s-witte-pva-lijm-946-ml-uitwasbaar-en-kindvriendelijk-geweldig-voor-het-maken-van-slijm-en-om-mee-te-knutselen/9200000103624034/", prijs: "Elmer's 946 ml · € 19,38" },
+      { w: "bol", url: "https://www.bol.com/nl/nl/p/lijm-wit-op-waterbasis-1-liter-ook-voor-drakenslijm-of-smurfensnot/9200000090032706/", prijs: "Collall 1 liter" },
     ],
-    zoekIn: ["hema", "action"],
   },
   lijm_helder: {
     naam: "Transparante PVA-lijm", emoji: "🫙", winkels: ["hema"], zoek: "kinderlijm transparant",
-    let: "Op het etiket moet PVA of 'op waterbasis' staan. Transparant = doorzichtig slijm, mooi met glitter. HEMA kinderlijm (waterbasis, 100 ml) werkt: HEMA gebruikt hem zelf in hun slijmrecept. Voor 120 ml heb je 2 flesjes nodig.",
+    let: "HEMA kinderlijm (de doorzichtige 'Water Basis'-fles) werkt: HEMA gebruikt hem zelf in hun slijmrecept. Van de fles van 100 ml heb je er 2 nodig.",
     links: [
-      { w: "hema", url: "https://www.hema.nl/speelgoed-hobby/knutselen/lijm/kinderlijm-200ml-15900626.html", prijs: "€3,69" },
-      { w: "bol", url: "https://www.bol.com/nl/nl/p/collall-kinderlijm-transparant-1000-ml-geschikt-voor-het-maken-van-slijm/9200000066094139/", prijs: "± €15 / liter" },
+      { w: "hema", url: "https://www.hema.nl/speelgoed-hobby/knutselen/lijm/kinderlijm-200ml-15900626.html", prijs: "200 ml · € 3,69" },
+      { w: "hema", url: "https://www.hema.nl/speelgoed-hobby/knutselen/lijm/lijm-waterbasis-100ml-15900426.html", prijs: "100 ml · € 1,99" },
+      { w: "bol", url: "https://www.bol.com/nl/nl/p/collall-kinderlijm-transparant-1000-ml-geschikt-voor-het-maken-van-slijm/9200000066094139/", prijs: "Collall 1 liter" },
     ],
   },
   soda: {
-    naam: "Baking soda (zuiveringszout)", emoji: "🧂", winkels: ["ah", "jumbo"], zoek: "baking soda",
+    naam: "Baking soda (zuiveringszout)", emoji: "🧂", winkels: ["ah", "jumbo", "kruidvat"], zoek: "baking soda",
     let: "Niet verwarren met bakpoeder, kristalsoda of zilversoda! Arm & Hammer is de bekendste.",
     links: [
-      { w: "jumbo", url: "https://www.jumbo.com/producten/arm-hammer-pure-baksoda-454-g-580764DS", prijs: "€1,89" },
-      { w: "ah", url: "https://www.ah.nl/producten/product/wi386329/arm-en-hammer-pure-baking-soda" },
+      { w: "jumbo", url: "https://www.jumbo.com/producten/arm-hammer-pure-baksoda-454-g-580764DS", prijs: "€ 1,89" },
+      { w: "ah", url: "https://www.ah.nl/producten/product/wi386329/pure-baking-soda" },
+      { w: "kruidvat", url: "https://www.kruidvat.nl/arm-hammer-pure-baking-soda/p/6558662" },
     ],
   },
   lens: {
@@ -384,9 +386,8 @@ const ARTIKELEN = {
     zoekIn: ["ah"],
   },
   glitter: {
-    naam: "Glitter", emoji: "✨", winkels: ["action", "hema"], zoek: "glitter",
-    links: [{ w: "action", url: "https://www.action.com/nl-nl/p/3210785/decotime-glitterbuisjes/", prijs: "€1,99" }],
-    zoekIn: ["hema"],
+    naam: "Glitter", emoji: "✨", winkels: ["action"], zoek: "glitter",
+    links: [{ w: "action", url: "https://www.action.com/nl-nl/p/3210785/decotime-glitterbuisjes/", prijs: "€ 1,99" }],
   },
   scheerschuim: {
     naam: "Scheerschuim (wit, geen gel)", emoji: "🫧", winkels: ["action", "etos", "kruidvat", "jumbo", "ah"], zoek: "scheerschuim",

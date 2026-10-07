@@ -371,7 +371,7 @@ const ARTIKELEN = {
   },
   lens: {
     naam: "Lenzenvloeistof met boorzuur", emoji: "💧", winkels: ["etos", "ah"], zoek: "lenzenvloeistof all-in-1",
-    let: "Etos All-in-1 heeft boorzuur (ook bij AH te koop). Kruidvat Opticare en Jumbo all-in-one (zacht én hard) NIET. Twijfel? Kijk of er 'boorzuur' of 'borax' op staat.",
+    let: "Etos All-in-1 heeft boorzuur (ook bij AH te koop). Kruidvat Opticare en Jumbo all-in-one (zacht én hard) NIET. Twijfel? Doe de Lenzencheck in de app.",
     links: [
       { w: "etos", url: "https://www.etos.nl/producten/etos-zachte-lenzen-all-in-1-vloeistof-360-ml-120288475.html", prijs: "€5,12" },
       { w: "kruidvat", url: "https://www.kruidvat.nl/bausch-lomb-biotrue-multi-purpose-solution-lenzenvloeistof/p/6356215", prijs: "Biotrue ± €15" },
@@ -452,3 +452,12 @@ const PAKKETTEN = [
 
 // Link naar het Slijmfeestje-pakket (Etsy). Leeg = knop verborgen.
 const FEESTPAKKET_URL = "";
+
+// Lenzenvloeistof: werkt hij voor slijm? Alleen merken waarvan we het etiket zelf hebben gezien.
+const LENZEN = [
+  { merk: "Etos All-in-1 zachte lenzen", winkel: "Etos, Albert Heijn", werkt: true, bewijs: "Op het etiket staat 'borax/boorzuur'.", url: "https://www.etos.nl/producten/etos-zachte-lenzen-all-in-1-vloeistof-360-ml-120288475.html" },
+  { merk: "Biotrue (Bausch + Lomb)", winkel: "Kruidvat, online", werkt: true, bewijs: "Bevat boorzuur en boraatzout.", url: "https://www.kruidvat.nl/bausch-lomb-biotrue-multi-purpose-solution-lenzenvloeistof/p/6356215" },
+  { merk: "Kruidvat Opticare", winkel: "Kruidvat", werkt: false, bewijs: "Op de productpagina van Kruidvat staat geen boorzuur." },
+  { merk: "Jumbo all-in-one zachte lenzen", winkel: "Jumbo", werkt: false, bewijs: "Etiket: Pluronic, PVP, EDTA. Geen boorzuur (gecontroleerd 6 okt 2026)." },
+  { merk: "Jumbo all-in-one harde lenzen", winkel: "Jumbo", werkt: false, bewijs: "Etiket: HPMC, PVP, Pluronic, EDTA, PHMB. Geen boorzuur gezien (gecontroleerd 6 okt 2026)." },
+];

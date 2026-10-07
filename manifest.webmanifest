@@ -1,0 +1,17 @@
+{
+  "name": "SlijmLab – Stap voor stap het perfecte slijm",
+  "short_name": "SlijmLab",
+  "description": "Bewezen slijmrecepten, stap voor stap met voorleesstem, timers en slijm-dokter.",
+  "lang": "nl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1b0b3f",
+  "theme_color": "#1b0b3f",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

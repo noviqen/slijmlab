@@ -3,7 +3,7 @@
 // ---------- opslag ----------
 const OPSLAG = "slijmlab-v1";
 const staat = Object.assign(
-  { gemaakt: {}, sterren: {}, favorieten: [], porties: 1, lijst: [], heb: {} },
+  { gemaakt: {}, sterren: {}, favorieten: [], porties: 1, lijst: [], heb: {}, voorlezen: true },
   JSON.parse(localStorage.getItem(OPSLAG) || "{}")
 );
 const bewaar = () => localStorage.setItem(OPSLAG, JSON.stringify(staat));
@@ -17,7 +17,7 @@ function toonTab(id, { scroll = true } = {}) {
   document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("actief", t.id === id));
   document.querySelectorAll("#nav button").forEach((b) => b.classList.toggle("actief", b.dataset.tab === id));
   huidigeTab = id;
-  if (id !== "stappen") { stopTimer(); laatSchermSlapen(); }
+  if (id !== "stappen") { stopTimer(); laatSchermSlapen(); stem.pause(); }
   if (id === "mijn") renderMijn();
   if (id === "boodschappen") renderBoodschappen();
   if (scroll) window.scrollTo({ top: 0, behavior: "smooth" });
@@ -72,6 +72,16 @@ function piep(freqs = [660, 880], duur = 0.12) {
   } catch (_) { /* geen geluid */ }
 }
 const slurp = () => piep([300, 220, 160], 0.09);
+
+// ---------- voorlezen (vooraf gemaakte mp3's, ElevenLabs-stem Roos) ----------
+const AUDIO_V = 1;
+const stem = new Audio();
+function spreek(naam) {
+  if (!staat.voorlezen) return;
+  stem.pause();
+  stem.src = `audio/${naam}.mp3?v=${AUDIO_V}`;
+  stem.play().catch(() => {});
+}
 
 // ---------- scherm wakker houden tijdens het maken ----------
 let wakeLock = null;
@@ -244,10 +254,16 @@ function renderStap() {
   timerTotaal = timerRest = s.timer || 0;
   $("#stapInhoud").innerHTML = `
     <div class="stapmodus">
-      <button class="terug" data-actie="stoppen">✕ Stoppen</button>
+      <div class="stapbalk">
+        <button class="terug" data-actie="stoppen">✕ Stoppen</button>
+        <span>
+          <button class="terug" data-actie="opnieuw" title="Nog een keer voorlezen">🔁</button>
+          <button class="terug" data-actie="stem" title="Voorlezen aan/uit">${staat.voorlezen ? "🔊 Voorlezen aan" : "🔇 Voorlezen uit"}</button>
+        </span>
+      </div>
       <h2 style="text-align:center;margin:0">${r.emoji} ${esc(r.naam)}</h2>
       <div class="voortgang"><div style="width:${pct}%"></div></div>
-      <div class="stapkaart" style="border-top:8px solid ${r.kleur[0]}">
+      <div class="stapkaart" data-actie="volgende" style="border-top:8px solid ${r.kleur[0]}">
         <div class="stapnr">Stap ${stapIndex + 1} van ${n}</div>
         <div class="stapicoon">${s.i || "👉"}</div>
         <div class="staptekst">${esc(s.t)}</div>
@@ -261,12 +277,14 @@ function renderStap() {
             </div>
             <button data-actie="timer" id="timerKnop">▶ Start timer</button>
           </div>` : ""}
+        <div class="tikhint">👆 Plakhanden? Tik ergens op de kaart (mag met je elleboog!) voor de volgende stap</div>
       </div>
       <div class="stapnav">
         <button class="grote-knop vorige" data-actie="vorige" ${stapIndex === 0 ? "disabled style='opacity:.4'" : ""}>← Terug</button>
         <button class="grote-knop" data-actie="volgende">${stapIndex === n - 1 ? "Klaar! 🎉" : "Volgende →"}</button>
       </div>
     </div>`;
+  spreek(`${r.id}-${stapIndex}`);
 }
 function tikTimer() {
   timerRest--;
@@ -278,12 +296,20 @@ function tikTimer() {
     piep([660, 880, 1100, 880, 1100], 0.15);
     if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
     toast("⏰ Tijd is om! Ga door naar de volgende stap.");
+    setTimeout(() => spreek("tijd-om"), 900);
   }
 }
 $("#stapInhoud").addEventListener("click", (e) => {
   const a = e.target.closest("[data-actie]"); if (!a) return;
   const act = a.dataset.actie;
-  if (act === "stoppen") { openRecept(recept.id); return; }
+  if (act === "stoppen") { stem.pause(); openRecept(recept.id); return; }
+  if (act === "opnieuw") { const v = staat.voorlezen; staat.voorlezen = true; spreek(`${recept.id}-${stapIndex}`); staat.voorlezen = v; return; }
+  if (act === "stem") {
+    staat.voorlezen = !staat.voorlezen; bewaar();
+    a.textContent = staat.voorlezen ? "🔊 Voorlezen aan" : "🔇 Voorlezen uit";
+    staat.voorlezen ? spreek(`${recept.id}-${stapIndex}`) : stem.pause();
+    return;
+  }
   if (act === "timer") {
     if (timer) { stopTimer(); a.textContent = "▶ Verder"; }
     else if (timerRest > 0) { timer = setInterval(tikTimer, 1000); a.textContent = "⏸ Pauze"; piep([520], 0.08); }
@@ -306,6 +332,7 @@ $("#stapInhoud").addEventListener("click", (e) => {
 
 function klaar() {
   stopTimer(); laatSchermSlapen();
+  spreek("klaar");
   const oudeBadges = verdiendeBadges().length;
   staat.gemaakt[recept.id] = (staat.gemaakt[recept.id] || 0) + 1;
   bewaar();
@@ -394,6 +421,49 @@ function renderVeilig() {
       <div class="paneel"><div class="groot">${b.i}</div><h3>${esc(b.titel)}</h3><p>${esc(b.tekst)}</p></div>`).join("")}
     </div>`;
 }
+
+// ---------- LENZENCHECK ----------
+const BOOR = /bor(ax|aat|ate|ic|zuur|iumzout)|boorzuur|natriumboraat|sodium borate/i;
+function renderLenzen() {
+  $("#lenzenInhoud").innerHTML = `
+    <h2>🔍 Werkt mijn lenzenvloeistof?</h2>
+    <p class="hint">De nummer 1 reden dat slijm mislukt: lenzenvloeistof zonder boorzuur. Check het hier.</p>
+    <div class="paneel">
+      <h3>Staat er een woord met <span class="boor">bor</span> op het etiket?</h3>
+      <p>Kijk bij <b>Samenstelling</b> of <b>Ingrediënten</b>. Zoek naar: <b>boorzuur</b>, <b>borax</b>, <b>boric acid</b>, <b>borate</b> of <b>natriumboraat</b>.</p>
+      <div class="knoprij">
+        <button class="grote-knop" data-lens="ja">✅ Ja, ik zie 'bor'</button>
+        <button class="grote-knop roze" data-lens="nee">❌ Nee, niet te vinden</button>
+      </div>
+      <div id="lensUitslag"></div>
+      <details class="overtypen"><summary>Of typ de samenstelling over</summary>
+        <textarea id="lensTekst" rows="3" placeholder="Bijvoorbeeld: Pluronic, PVP, EDTA, pH 7.2"></textarea>
+        <div id="lensTekstUitslag"></div>
+      </details>
+    </div>
+    <div class="paneel">
+      <h3>📋 Merken die we hebben gecheckt</h3>
+      ${LENZEN.map((l) => `
+        <div class="lens ${l.werkt ? "ja" : "nee"}">
+          <span class="lens-icoon">${l.werkt ? "✅" : "❌"}</span>
+          <div><b>${esc(l.merk)}</b> <small>· ${esc(l.winkel)}</small><br><small>${esc(l.bewijs)}</small>
+          ${l.url ? `<div class="koopknoppen"><a class="koop" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">Bekijk ↗</a></div>` : ""}</div>
+        </div>`).join("")}
+      <p class="sub" style="margin-top:10px">Let op: of het voor zachte of harde lenzen is, maakt niet uit. Het gaat alleen om boorzuur.</p>
+    </div>`;
+}
+const UITSLAG_JA = `<div class="tipkaart tip"><b>✅ Deze werkt!</b>Boorzuur zorgt dat de lijm slijm wordt. Veel plezier!</div>`;
+const UITSLAG_NEE = `<div class="tipkaart fout"><b>❌ Deze werkt niet voor slijm</b>Zonder boorzuur blijft het waterige lijm. Neem Etos All-in-1 zachte lenzen (Etos of AH) of Biotrue.</div>`;
+$("#lenzenInhoud").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-lens]"); if (!b) return;
+  $("#lensUitslag").innerHTML = b.dataset.lens === "ja" ? UITSLAG_JA : UITSLAG_NEE;
+  piep(b.dataset.lens === "ja" ? [660, 880] : [330, 220], 0.12);
+});
+$("#lenzenInhoud").addEventListener("input", (e) => {
+  if (e.target.id !== "lensTekst") return;
+  const t = e.target.value.trim();
+  $("#lensTekstUitslag").innerHTML = t.length < 6 ? "" : BOOR.test(t) ? UITSLAG_JA : UITSLAG_NEE;
+});
 
 // ---------- MIJN LAB + BADGES ----------
 const aantalGemaakt = () => Object.values(staat.gemaakt).reduce((a, b) => a + b, 0);
@@ -591,7 +661,13 @@ renderKaarten();
 renderProblemen();
 renderBasis();
 renderVeilig();
+renderLenzen();
 updateScore();
 updateLijstTeller();
 const start = location.hash.slice(1);
 if (start && RECEPTEN.some((r) => r.id === start)) openRecept(start);
+
+// ---------- offline + installeerbaar ----------
+if ("serviceWorker" in navigator && location.protocol === "https:") {
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}

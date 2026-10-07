@@ -347,3 +347,17 @@ a.grote-knop { text-decoration: none; display: inline-block; }
 .feest-banner { margin-top: 20px; background: #fff; border-radius: 24px; padding: 16px 20px; box-shadow: var(--schaduw); display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
 .feest-banner .groot { font-size: 2.6rem; }
 .feest-banner div { flex: 1; min-width: 200px; }
+.stapbalk { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.stapbalk span { display: flex; gap: 6px; }
+.stapkaart { cursor: pointer; user-select: none; }
+.stapkaart:active { transform: scale(.99); }
+.tikhint { margin-top: 8px; font-size: .9rem; color: var(--zacht); }
+/* LENZENCHECK */
+.boor { background: #ffd23f; padding: 0 6px; border-radius: 6px; }
+.lens { display: flex; gap: 12px; padding: 10px 4px; border-top: 1px solid #f0e9ff; }
+.lens:first-of-type { border-top: 0; }
+.lens-icoon { font-size: 1.6rem; }
+.lens small { color: var(--zacht); }
+.overtypen { margin-top: 12px; }
+.overtypen summary { cursor: pointer; font-weight: 700; color: var(--paars); }
+.overtypen textarea { width: 100%; margin-top: 8px; border: 2px solid #e4d9ff; border-radius: 14px; padding: 10px; font: inherit; }

@@ -4,12 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>SlijmLab – Stap voor stap het perfecte slijm</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self'; manifest-src 'self'; worker-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="Maak stap voor stap het perfecte slijm: fluffy, glitter, glow-in-the-dark en eetbaar slijm. Alleen bewezen recepten, met timers, slijm-dokter en boodschappenlijst.">
-  <meta name="theme-color" content="#7b2ff7">
+  <meta name="theme-color" content="#1b0b3f">
   <link rel="icon" href="logo.svg?v=1" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="SlijmLab">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
   <noscript><p style="padding:20px;text-align:center">Zet JavaScript aan om SlijmLab te gebruiken.</p></noscript>
@@ -31,6 +37,7 @@
     <button data-tab="recepten" class="actief">🫧 Recepten</button>
     <button data-tab="basis">🧠 Zo werkt slijm</button>
     <button data-tab="boodschappen">🛒 Boodschappen <span class="teller" id="lijstTeller" hidden></span></button>
+    <button data-tab="lenzen">🔍 Lenzencheck</button>
     <button data-tab="hulp">🚑 Slijm-dokter</button>
     <button data-tab="veilig">🛡️ Veiligheid</button>
     <button data-tab="mijn">🏅 Mijn lab</button>
@@ -57,6 +64,9 @@
     <!-- BOODSCHAPPEN -->
     <section id="boodschappen" class="tab"><div id="boodschappenInhoud"></div></section>
 
+    <!-- LENZENCHECK -->
+    <section id="lenzen" class="tab"><div id="lenzenInhoud"></div></section>
+
     <!-- HULP -->
     <section id="hulp" class="tab">
       <h2>🚑 Slijm-dokter</h2>
@@ -80,7 +90,7 @@
   <footer>SlijmLab · altijd met een volwassene in de buurt · <a href="#" id="naarVeilig">veiligheid</a></footer>
 
   <canvas id="confetti" aria-hidden="true"></canvas>
-  <script src="data.js?v=9"></script>
-  <script src="app.js?v=6"></script>
+  <script src="data.js?v=10"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>

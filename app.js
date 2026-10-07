@@ -44,6 +44,7 @@ function getal(x) {
   if (br) return (heel ? heel : "") + br;
   return String(Math.round(x * 10) / 10).replace(".", ",");
 }
+function gram(x) { return x < 10 ? String(Math.round(x * 10) / 10).replace(".", ",") : String(Math.round(x)); }
 function hoeveelheid(ing, factor) {
   if (ing.h == null) return ing.e || "";
   return `${getal(ing.h * factor)} ${ing.e || ""}`.trim();
@@ -191,7 +192,7 @@ function renderDetail() {
           ${r.ingredienten.map((ing, i) => `
             <li data-ing="${i}" class="${afgevinkt.has(i) ? "af" : ""}">
               <span class="vink">✓</span>
-              <span class="hoeveel">${esc(hoeveelheid(ing, ing.vast ? 1 : f))}</span>
+              <span class="hoeveel">${esc(hoeveelheid(ing, ing.vast ? 1 : f))}${ing.g ? `<small class="gram">± ${gram(ing.g * (ing.vast ? 1 : f))} g</small>` : ""}</span>
               <span class="naam">${esc(ing.n)}${ing.x ? `<span class="extra">${esc(ing.x)}</span>` : ""}</span>
             </li>`).join("")}
         </ul>

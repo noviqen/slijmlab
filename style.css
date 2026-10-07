@@ -361,3 +361,5 @@ a.grote-knop { text-decoration: none; display: inline-block; }
 .overtypen { margin-top: 12px; }
 .overtypen summary { cursor: pointer; font-weight: 700; color: var(--paars); }
 .overtypen textarea { width: 100%; margin-top: 8px; border: 2px solid #e4d9ff; border-radius: 14px; padding: 10px; font: inherit; }
+.ingredienten .gram { display: block; font-size: .85rem; font-weight: 700; color: #0b8a63; }
+.ingredienten .hoeveel { white-space: nowrap; }

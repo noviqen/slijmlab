@@ -1,4 +1,7 @@
 "use strict";
+// Grammen (g) zijn omgerekend met: witte PVA-lijm 1,05 g/ml (Elmer's veiligheidsblad), transparante PVA-lijm
+// 1,025 g/ml (etiket HEMA 100 ml = 102,5 g; Collall), baking soda 4,8 g per tl (Arm & Hammer: 1/8 tl = 0,6 g),
+// maizena 128 g per kopje en poedersuiker 120 g per kopje (USDA), chiazaad ± 12 g per el.
 // Recepten gebaseerd op vergelijking van o.a. Elmer's, Arm & Hammer, HEMA, Little Bins for Little Hands,
 // One Little Project, Best Ideas for Kids, RIVM-beoordeling borax in slijm (2019). Zie README.md.
 
@@ -15,8 +18,8 @@ const RECEPTEN = [
     bron: [{ naam: "Elmer's (officieel recept)", url: "https://www.survivingateacherssalary.com/diy-worry-free-slime-recipe-kids-elmers-recipe/" }],
     bewijs: "114 reacties, veel 'werkte perfect'. Mislukte het, dan zat er geen boorzuur in de lenzenvloeistof",
     ingredienten: [
-      { h: 118, e: "ml", n: "witte PVA-kinderlijm", x: "Moet PVA zijn, anders wordt het geen slijm. Wit geeft romig slijm. 1 flesje van ± 120 ml." },
-      { h: 0.5, e: "el", n: SODA, x: SODA_X },
+      { h: 118, e: "ml", g: 124, n: "witte PVA-kinderlijm", x: "Moet PVA zijn, anders wordt het geen slijm. Wit geeft romig slijm. 1 flesje van ± 120 ml." },
+      { h: 0.5, e: "el", g: 7, n: SODA, x: SODA_X },
       { h: 1, e: "el", n: LENS, x: LENS_X + ". Houd er nog wat extra bij." },
       { h: 2, e: "druppels", n: "kleurstof (mag ook niet)" },
     ],
@@ -38,9 +41,9 @@ const RECEPTEN = [
     bron: [{ naam: "Best Ideas for Kids", url: "https://www.thebestideasforkids.com/fluffy-slime-recipe/" }],
     bewijs: "4,95 van 5 sterren uit 128 beoordelingen en 234 reacties",
     ingredienten: [
-      { h: 160, e: "ml", n: "witte PVA-kinderlijm", x: "Moet PVA zijn. Dit recept is getest met witte lijm, dat geeft romig slijm." },
+      { h: 160, e: "ml", g: 168, n: "witte PVA-kinderlijm", x: "Moet PVA zijn. Dit recept is getest met witte lijm, dat geeft romig slijm." },
       { h: 60, e: "ml", n: "water" },
-      { h: 0.5, e: "tl", n: SODA, x: SODA_X },
+      { h: 0.5, e: "tl", g: 2.4, n: SODA, x: SODA_X },
       { h: 600, e: "ml", n: "scheerschuim", x: "480 tot 720 ml (2 à 3 kopjes). Schuim, géén gel." },
       { h: 1.5, e: "el", n: LENS, x: LENS_X },
       { h: 3, e: "druppels", n: "kleurstof" },
@@ -67,9 +70,9 @@ const RECEPTEN = [
     ],
     bewijs: "257 reacties, waaronder 'this worked perfectly for us'",
     ingredienten: [
-      { h: 120, e: "ml", n: "transparante PVA-lijm", x: "Moet PVA zijn. Transparant geeft doorzichtig slijm, mooi met glitter. Bv. HEMA kinderlijm (2 flesjes van 100 ml)." },
+      { h: 120, e: "ml", g: 123, n: "transparante PVA-lijm", x: "Moet PVA zijn. Transparant geeft doorzichtig slijm, mooi met glitter. Bv. HEMA kinderlijm (2 flesjes van 100 ml)." },
       { h: 120, e: "ml", n: "water" },
-      { h: 0.5, e: "tl", n: SODA, x: SODA_X + " Een kwart theelepel mag ook." },
+      { h: 0.5, e: "tl", g: 2.4, n: SODA, x: SODA_X + " Een kwart theelepel mag ook." },
       { h: 1, e: "el", n: LENS, x: LENS_X },
       { h: null, n: "glitter", x: "Zoveel als je mooi vindt" },
     ],
@@ -94,7 +97,7 @@ const RECEPTEN = [
     bewijs: "Het officiële recept van de lijmmaker, met dezelfde verhouding als het klassieke Elmer's-recept",
     ingredienten: [
       { h: 148, e: "ml", n: "Elmer's Glow in the Dark lijm", x: "1 fles. In Nederland online te koop via bol.com", vast: true },
-      { h: 0.5, e: "el", n: SODA, x: SODA_X, vast: true },
+      { h: 0.5, e: "el", g: 7, n: SODA, x: SODA_X, vast: true },
       { h: 1, e: "el", n: LENS, x: LENS_X + ". Houd er nog wat extra bij.", vast: true },
     ],
     stappen: [
@@ -119,10 +122,10 @@ const RECEPTEN = [
     bewijs: "Positieve reacties van ouders en een kinderopvang, zelfde verhouding bij Mothercould",
     waarschuwing: "Proefveilig, maar geen eten: het smaakt niet lekker en veel chiazaad kan buikpijn geven.",
     ingredienten: [
-      { h: 60, e: "ml", n: "chiazaad", x: "¼ kopje" },
+      { h: 60, e: "ml", g: 48, n: "chiazaad", x: "¼ kopje" },
       { h: 420, e: "ml", n: "water" },
       { h: 15, e: "druppels", n: "levensmiddelenkleurstof", x: "10 tot 20 druppels" },
-      { h: 840, e: "ml", n: "maizena", x: "720 tot 840 ml (3 à 3½ kopje). Afmeten met een maatbeker." },
+      { h: 840, e: "ml", g: 448, n: "maizena", x: "720 tot 840 ml (3 à 3½ kopje), dat is 384 tot 448 gram. Wegen is makkelijker!" },
     ],
     stappen: [
       { i: "🥣", t: "Roer het chiazaad en het water door elkaar." },
@@ -176,7 +179,7 @@ const RECEPTEN = [
     ingredienten: [
       { h: 57, e: "g", n: "witte marshmallows (spekjes)", x: "Witte marshmallows geven wit slijm" },
       { h: 1, e: "el", n: "zonnebloemolie" },
-      { h: 3, e: "el", n: "poedersuiker" },
+      { h: 3, e: "el", g: 23, n: "poedersuiker" },
     ],
     stappen: [
       { i: "🧑‍🍳", t: "Volwassene: doe de marshmallows in een magnetronkom en verwarm ze 30 seconden op 900 watt.", x: "Stop als ze opgezwollen zijn." },
@@ -201,7 +204,7 @@ const RECEPTEN = [
     allergenen: "ei-eiwit (kijk op de pot).",
     ingredienten: [
       { h: 1, e: "pot", n: "Marshmallow Fluff", x: "Bij AH en Jumbo, bij het broodbeleg" },
-      { h: 240, e: "ml", n: "poedersuiker", x: "1 kopje, plus extra zolang het plakt" },
+      { h: 240, e: "ml", g: 120, n: "poedersuiker", x: "1 kopje, plus extra zolang het plakt" },
       { h: 2, e: "druppels", n: "kleurstof (mag ook niet)" },
     ],
     stappen: [
@@ -228,8 +231,8 @@ const RECEPTEN = [
     waarschuwing: "Gesmolten beertjes worden heel heet en blijven lang heet. Alleen de volwassene doet de magnetron.",
     ingredienten: [
       { h: 240, e: "ml", n: "gummibeertjes", x: "1 kopje vol. Liefst één kleur, anders wordt het bruin" },
-      { h: 2, e: "el", n: "maizena" },
-      { h: 1, e: "el", n: "poedersuiker" },
+      { h: 2, e: "el", g: 16, n: "maizena" },
+      { h: 1, e: "el", g: 7.5, n: "poedersuiker" },
       { h: 0.5, e: "el", n: "zonnebloemolie", x: "Alleen als het nodig is" },
     ],
     stappen: [
